@@ -19,6 +19,16 @@ void Student::setGroupName(string groupName)
 	this->groupName = groupName;
 }
 
+void Student::setTestResult(int idTest, int result)
+{
+	listTestResult.insert(make_pair(idTest, result));
+}
+
+int Student::getTestResultById(int idTest)
+{
+	return listTestResult.find(idTest)->second;
+}
+
 void Student::info() const
 {
 	cout << "Student's id: " << idStudent << endl;
