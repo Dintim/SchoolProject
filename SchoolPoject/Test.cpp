@@ -42,19 +42,19 @@ void Test::delQuestion(int quesNum)
 	}	
 }
 
-void Test::insertStudentResult(string surname, int res)
+void Test::insertStudentResult(int id, int res)
 {
-	studentsResults.insert(make_pair(surname, res));
+	studentsResults.insert(make_pair(id, res));
 }
 
-void Test::delStidentResult(string surname)
+void Test::delStidentResult(int id)
 {
-	studentsResults.erase(surname);
+	studentsResults.erase(id);
 }
 
-int Test::getStudentResult(string surname)
+int Test::getStudentResult(int id)
 {
-	return studentsResults.find(surname)->second;	
+	return studentsResults.find(id)->second;	
 }
 
 

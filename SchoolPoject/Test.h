@@ -8,7 +8,7 @@ class Test
 	int idTest;
 	vector<Question> testQuestions;
 	int result;
-	map<string, int> studentsResults;
+	map<int, int> studentsResults;
 public:
 	Test();
 	Test(int idTest);
@@ -18,8 +18,8 @@ public:
 	
 	void addQuestion(Question ques);
 	void delQuestion(int quesNum);
-	void insertStudentResult(string surname, int res);
-	void delStidentResult(string surname);
-	int getStudentResult(string surname);
+	void insertStudentResult(int id, int res);
+	void delStidentResult(int id);
+	int getStudentResult(int id);
 };
 

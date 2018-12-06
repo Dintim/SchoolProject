@@ -29,6 +29,7 @@ void Question::setRightAnswers(int var)
 	rightAnswers.push_back(var);
 }
 
+
 string Question::convertQuesToString()
 {
 	string res = "Вопрос #";

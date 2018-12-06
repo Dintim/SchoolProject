@@ -23,8 +23,10 @@ public:
 
 	int getQuesNum()const { return this->quesNum; }
 	string getQuesText()const { return this->quesText; }
-	string convertQuesToString();
+	vector<string>& getAnswerChoice() { return this->answerChoice; }
+	vector<int>& getRightAnswers() { return this->rightAnswers; }
 
+	string convertQuesToString();
 	virtual void info();	
 };
 

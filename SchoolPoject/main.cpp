@@ -1,6 +1,7 @@
 //#include "Question.h"
 #include <Windows.h>
 #include "Test.h"
+#include "Teacher.h"
 
 
 void main()
@@ -15,8 +16,7 @@ void main()
 	q.setAnswerChoice("2. м€у");
 	q.setAnswerChoice("3. рр-гав");
 	q.setRightAnswers(1);
-	q.setRightAnswers(3);
-	
+	q.setRightAnswers(3);	
 
 	Question q2;
 	q2.setQuesText(" ак зовут собаку?");
@@ -29,6 +29,13 @@ void main()
 	tt.addQuestion(q);
 	tt.addQuestion(q2);
 
+	vector<string> vv = q.getAnswerChoice();
+	vector<int> x = q.getRightAnswers();
+	ostream_iterator<int> os(cout, "\n");
+	copy(begin(x), end(x), os);
+
+	Teacher t(14, "ƒинара", "ћукашева", 0, date_(22, 5, 1983));
+	t.info();
 
 	system("pause");
 }
