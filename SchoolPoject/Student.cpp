@@ -2,11 +2,10 @@
 
 
 
-Student::Student(int idStudent, string groupName, string firstName, string surname, bool sex, date_ birthDay)
+Student::Student(int idStudent, string firstName, string surname, bool sex, date_ birthDay)
 	:Human(firstName, surname, sex, birthDay)
 {
-	this->idStudent = idStudent;
-	this->groupName = groupName;
+	this->idStudent = idStudent;	
 }
 
 void Student::setIdStudent(int idStudent)
@@ -14,10 +13,10 @@ void Student::setIdStudent(int idStudent)
 	this->idStudent = idStudent;
 }
 
-void Student::setGroupName(string groupName)
-{
-	this->groupName = groupName;
-}
+//void Student::setGroupName(string groupName)
+//{
+//	this->groupName = groupName;
+//}
 
 void Student::setTestResult(int idTest, int result)
 {
@@ -32,14 +31,14 @@ int Student::getTestResultById(int idTest)
 void Student::info() const
 {
 	cout << "Student's id: " << idStudent << endl;
-	cout << "Group: " << groupName << endl;
+	//cout << "Group: " << groupName << endl;
 	Human::info();
 }
 
 string Student::convertToString()
 {
 	string res = to_string(idStudent) + ";";
-	res += groupName + ";";
+	//res += groupName + ";";
 	res += Human::convertToString();
 	return res;
 }
