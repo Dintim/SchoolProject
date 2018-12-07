@@ -61,7 +61,7 @@ void main()
 	sh.addTeacher(t1);
 	sh.addTeacher(t2);
 	sh.addTeacher(t3);
-	sh.delTeacher(10);
+	sh.delTeacher(14);
 	cout << sh.getCntTeachers();
 	
 	//sh.getTeacher(12).info();
