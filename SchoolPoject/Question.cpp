@@ -43,3 +43,15 @@ void Question::info()
 	ostream_iterator<string> oss(cout, "\n");	
 	copy(begin(answerChoice), end(answerChoice), oss);	
 }
+
+ostream & operator<<(ostream & os, const Question & obj)
+{
+	os << obj.getQuesText() << endl;
+	os << "Варианты ответов:\n";	
+	for (size_t i = 0; i < obj.getCntAnswerChoice(); i++)
+	{
+		os << obj.getAnswer(i) << endl;
+	}	
+	return os;
+	// TODO: вставьте здесь оператор return
+}

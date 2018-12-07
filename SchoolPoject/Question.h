@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <map>
 #include <iterator>
 #include <algorithm>
 using namespace std;
@@ -21,9 +22,13 @@ public:
 	
 	string getQuesText()const { return this->quesText; }	
 	vector<string>& getAnswerChoice() { return this->answerChoice; }
+	string getAnswer(int index)const { return answerChoice[index]; }
 	vector<int>& getRightAnswers() { return this->rightAnswers; }
+	int getCntAnswerChoice()const { return answerChoice.size(); }
 
 	string convertQuesToString();
 	virtual void info();	
 };
+
+ostream&operator<<(ostream&os, const Question&obj);
 
