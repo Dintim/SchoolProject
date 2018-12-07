@@ -4,18 +4,11 @@
 class Student :
 	public Human
 {
-	int idStudent;
-	//string groupName;
-	map<int, int> listTestResult;
+	int idStudent;	
 public:
 	Student(int idStudent, string firstName, string surname, bool sex, date_ birthDay);
-	void setIdStudent(int idStudent);
-	//void setGroupName(string groupName);
-	void setTestResult(int idTest, int result);
-	int getIdStudent()const { return idStudent; }
-	//string getGroupName()const { return groupName; }
-	map<int, int>& getListTestResult() { return listTestResult; }
-	int getTestResultById(int idTest);
+	void setIdStudent(int idStudent);	
+	int getIdStudent()const { return idStudent; }	
 
 	void info()const override;
 	string convertToString() override;

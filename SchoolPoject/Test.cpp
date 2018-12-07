@@ -16,45 +16,38 @@ void Test::setIdTest(int idTest)
 	this->idTest = idTest;
 }
 
-string Test::getQuestion(int quesNum)
+Question& Test::getQuestion(int number)
 {
-	string str;
-	for (auto &i:testQuestions)
+	for (size_t i = 0; i < testQuestions.size(); i++)
 	{
-		if (i.getQuesNum() == quesNum)
-			str=i.convertQuesToString();
-	}
-	return str;
+		if (i == number - 1) {
+			return testQuestions[i];
+		}
+	}	
 }
 
-void Test::addQuestion(Question ques)
+void Test::addQuestion(Question& ques)
 {
-	testQuestions.push_back(ques);
+	testQuestions.push_back(ques);	
 }
 
-void Test::delQuestion(int quesNum)
-{	
+void Test::delQuestion(int number)
+{		
 	for (size_t i=0; i< testQuestions.size(); i++)
 	{
-		if (testQuestions[i].getQuesNum() == quesNum) {
+		if (i == number-1) {
 			testQuestions.erase(begin(testQuestions)+i);
 		}
 	}	
 }
 
-void Test::insertStudentResult(int id, int res)
+void Test::print() const
 {
-	studentsResults.insert(make_pair(id, res));
+	for (auto i : testQuestions) {
+		i.info();
+		cout << endl << endl;
+	}
 }
 
-void Test::delStidentResult(int id)
-{
-	studentsResults.erase(id);
-}
-
-int Test::getStudentResult(int id)
-{
-	return studentsResults.find(id)->second;	
-}
 
 

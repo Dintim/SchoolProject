@@ -1,16 +1,13 @@
 #include "Question.h"
 
-int Question::num = 0;
 
 Question::Question()
-{
-	this->quesNum = ++num;
+{	
 	this->quesText = "";	
 }
 
-Question::Question(string question)
-{	
-	this->quesNum = ++num;
+Question::Question(string question){	
+	
 	this->quesText = question;
 }
 
@@ -32,9 +29,7 @@ void Question::setRightAnswers(int var)
 
 string Question::convertQuesToString()
 {
-	string res = "Вопрос #";
-	res+=to_string(quesNum)+":\n";
-	res += quesText+"\n";
+	string res = quesText+"\n";
 	for (auto &i : answerChoice) {
 		res += i + "\n";
 	}
@@ -43,7 +38,7 @@ string Question::convertQuesToString()
 
 void Question::info()
 {	
-	cout << "Вопрос #" << quesNum << ":\n" << this->quesText << endl;
+	cout << this->quesText << endl;
 	cout << "Варианты ответов:\n";
 	ostream_iterator<string> oss(cout, "\n");	
 	copy(begin(answerChoice), end(answerChoice), oss);	

@@ -4,22 +4,19 @@
 
 
 class Test
-{
+{	
 	int idTest;
 	vector<Question> testQuestions;
-	int result;
-	map<int, int> studentsResults;
+	int result;	
 public:
 	Test();
 	Test(int idTest);
 	void setIdTest(int idTest);
-	int getIdTest()const { return this->idTest; }
-	string getQuestion(int number);	
+	int getIdTest()const { return this->idTest; }	
+	Question& getQuestion(int number);	
 	
-	void addQuestion(Question ques);
-	void delQuestion(int quesNum);
-	void insertStudentResult(int id, int res);
-	void delStidentResult(int id);
-	int getStudentResult(int id);
+	void addQuestion(Question& ques);
+	void delQuestion(int number);
+	void print()const;	
 };
 

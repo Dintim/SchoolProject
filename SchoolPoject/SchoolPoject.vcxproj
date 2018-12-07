@@ -118,6 +118,7 @@
     <ClInclude Include="date_.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Question.h" />
+    <ClInclude Include="School.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="Teacher.h" />
     <ClInclude Include="Test.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Question.cpp" />
+    <ClCompile Include="School.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="Test.cpp" />

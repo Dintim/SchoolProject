@@ -7,7 +7,7 @@
 #include <algorithm>
 using namespace std;
 
-class Human
+class Human abstract
 {
 	string firstName;
 	string surname;
