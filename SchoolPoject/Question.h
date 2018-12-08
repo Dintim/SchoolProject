@@ -25,6 +25,7 @@ public:
 	string getAnswer(int index)const { return answerChoice[index]; }
 	vector<int>& getRightAnswers() { return this->rightAnswers; }
 	int getCntAnswerChoice()const { return answerChoice.size(); }
+	int getCntRightAnswers()const { return rightAnswers.size(); }
 
 	string convertQuesToString();
 	virtual void info();	

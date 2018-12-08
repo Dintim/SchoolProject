@@ -17,6 +17,9 @@ public:
 	
 	void addQuestion(Question& ques);
 	void delQuestion(int number);
+	int getCntTestQuestions()const { return testQuestions.size(); }
+	auto getBeginTestQuestions()const { return begin(testQuestions); }
+	auto getEndTestQuestions()const { return end(testQuestions); }
 	void print()const;	
 };
 
