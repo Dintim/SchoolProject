@@ -68,8 +68,9 @@ int main()
 	//sh.getTeacher(12).info();
 
 	int ch;
-	int res = 0;
+	int res;
 	while (true) {
+		res = 0;
 		cout << "0 - exit, 1 - pass test\n";
 		cin >> ch;
 		if (ch == 0) break;
@@ -85,8 +86,7 @@ int main()
 					if (ans == 0) break;
 					myAnswers.push_back(ans);
 				}
-				sort(begin(myAnswers), end(myAnswers));
-				if (tt[i->first].getCntRightAnswers() != myAnswers.size()) continue;
+				sort(begin(myAnswers), end(myAnswers));				
 				if (tt[i->first].getRightAnswers() == myAnswers) res++;
 			}
 			cout << "твой результат: " << res << endl;
