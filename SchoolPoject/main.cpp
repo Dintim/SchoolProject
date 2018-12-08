@@ -11,7 +11,7 @@ void main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Rus");
 
-	Question q;
+	/*Question q;
 	q.setQuesText("Как разговаривает собака?");
 	q.setAnswerChoice("1. гав-гав");
 	q.setAnswerChoice("2. мяу");
@@ -36,14 +36,14 @@ void main()
 	Test tt(123);
 	tt.addQuestion(q);
 	tt.addQuestion(q2);
-	//tt.delQuestion(1);
+	tt.delQuestion(3);
 
 	cout << tt[1];
 
 	Test tt2(456);
 	tt2.addQuestion(q3);	
 
-	tt2.print();
+	tt2.print();*/
 
 	/*vector<string> vv = q.getAnswerChoice();
 	vector<int> x = q.getRightAnswers();
@@ -53,7 +53,7 @@ void main()
 	Teacher t(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
 	t.info();*/
 
-	/*Teacher t1(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
+	Teacher t1(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
 	Teacher t2(12, "Асель", "Ибрагимова", 0, date_(26, 5, 1983));
 	Teacher t3(15, "Тимур", "Кадырбаев", 1, date_(18, 6, 1970));
 
@@ -61,8 +61,9 @@ void main()
 	sh.addTeacher(t1);
 	sh.addTeacher(t2);
 	sh.addTeacher(t3);
-	sh.delTeacher(14);
-	cout << sh.getCntTeachers();*/
+	sh.delTeacher(11);
+	cout << sh.getCntTeachers();
+	
 	
 	//sh.getTeacher(12).info();
 

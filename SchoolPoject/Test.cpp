@@ -22,13 +22,20 @@ Question& Test::operator[](int number)
 }
 
 void Test::addQuestion(Question& ques)
-{	
+{		
 	testQuestions.insert(make_pair(++quesNum, ques));
 }
 
 void Test::delQuestion(int number)
 {	
-	testQuestions.erase(number);
+	try
+	{
+		testQuestions.erase(number);
+	}
+	catch (exception& e)
+	{
+		cout << e.what();
+	}
 }
 
 void Test::print() const

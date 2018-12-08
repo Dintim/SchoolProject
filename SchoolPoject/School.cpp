@@ -22,7 +22,10 @@ void School::delStudent(int idStudent)
 	auto it = find_if(begin(students), end(students), [&idStudent](const Student& s) {
 		return (s.getIdStudent() == idStudent);
 	});
-	students.erase(it);	
+	if (it != students.end())
+		students.erase(it);
+	else
+		return;
 }
 
 void School::addTeacher(Teacher & t)
@@ -35,7 +38,10 @@ void School::delTeacher(int idTeacher)
 	auto it = find_if(begin(teachers), end(teachers), [&idTeacher](const Teacher& t) {
 		return(t.getIdTeacher() == idTeacher);
 	});
-	teachers.erase(it);
+	if (it != teachers.end())
+		teachers.erase(it);
+	else
+		return;
 }
 
 const Student & School::getStudent(int idStudent) const
