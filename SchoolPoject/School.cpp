@@ -66,3 +66,67 @@ const Teacher & School::getTeacher(int idTeacher) const
 			return teachers[i];
 	}
 }
+
+void School::writeStudentsToFile(string fileName)
+{
+	ofstream os(fileName);
+	string s;
+	for (auto i = begin(students); i != end(students); i++)
+	{
+		s = i->convertToString();
+		os << s;
+		if (i != end(students) - 1)
+			os << endl;
+	}
+	os.close();
+}
+
+void School::writeTeachersToFile(string fileName)
+{
+	ofstream os(fileName);
+	string s;
+	for (auto i = begin(teachers); i != end(teachers); i++)
+	{
+		s = i->convertToString();
+		os << s;
+		if (i != end(teachers) - 1)
+			os << endl;
+	}
+	os.close();
+}
+
+void School::readStudentsFromFile(string fileName)
+{
+	ifstream is(fileName);
+	string s;
+	while (!is.eof()) {
+		getline(is, s);
+		Student st;
+		st.readFromString(s);
+		students.push_back(st);
+	}
+	is.close();
+}
+
+void School::readTeachersFromFile(string fileName)
+{
+	ifstream is(fileName);
+	string s;
+	while (!is.eof()) {
+		getline(is, s);
+		Teacher t;
+		t.readFromString(s);
+		teachers.push_back(t);
+	}
+	is.close();
+}
+
+int cntStudents(const School & obj)
+{
+	return obj.getCntStudents();
+}
+
+int cntTeachers(const School & obj)
+{
+	return obj.getCntTeachers();
+}

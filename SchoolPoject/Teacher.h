@@ -3,10 +3,12 @@
 class Teacher :
 	public Human
 {
+	static int seqIdTeacher;
 	int idTeacher;
 	string status;
 public:
-	Teacher(int idTeacher, string firstName, string surname, bool sex, date_ birthDay);
+	Teacher(string firstName, string surname, bool sex, date_ birthDay);
+	Teacher() = default;
 	void setIdTeacher(int idTeacher);	
 	int getIdTeacher()const { return idTeacher; }
 	void setStatus(string status);

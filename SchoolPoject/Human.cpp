@@ -40,10 +40,10 @@ void Human::info() const
 
 string Human::convertToString()
 {
-	string res = firstName + ";";
-	res += surname + ";";
-	res += to_string(sex) + ";";
-	res += birthDay.dateToString() + ";";
+	string res = firstName + ';';
+	res += surname + ';';
+	res += to_string(sex) + ';';
+	res += birthDay.dateToString() + ';';
 	return res;
 }
 

@@ -1,11 +1,11 @@
 #include "Student.h"
 
+int Student::seqIdStudent = 0;
 
-
-Student::Student(int idStudent, string firstName, string surname, bool sex, date_ birthDay)
+Student::Student(string firstName, string surname, bool sex, date_ birthDay)
 	:Human(firstName, surname, sex, birthDay)
 {
-	this->idStudent = idStudent;
+	this->idStudent = ++seqIdStudent;
 	this->status = "учится";
 }
 
@@ -28,8 +28,16 @@ void Student::info() const
 
 string Student::convertToString()
 {
-	string res = to_string(idStudent) + ";";	
+	string res = to_string(idStudent) + ';';	
 	res += Human::convertToString();
-	res += status + ";";
+	res += status + ';';
 	return res;
+}
+
+void Student::readFromString(string & str)
+{
+	this->idStudent = stoi(str.substr(0, str.find(';')));
+	str = str.substr(str.find(';') + 1);
+	Human::readFromString(str);
+	this->status = str.substr(0, str.find(';'));
 }

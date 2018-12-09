@@ -3,6 +3,7 @@
 #include "Test.h"
 #include "Teacher.h"
 #include "School.h"
+#include <fstream>
 
 
 int main()
@@ -51,10 +52,10 @@ int main()
 	ostream_iterator<int> os(cout, "\n");
 	copy(begin(x), end(x), os);*/
 
-	Teacher t(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
+	/*Teacher t(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
 	t.setStatus("отпуск");
 	t.info();
-	cout << t.convertToString();
+	cout << t.convertToString();*/
 
 	/*Teacher t1(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
 	Teacher t2(12, "Асель", "Ибрагимова", 0, date_(26, 5, 1983));
@@ -96,8 +97,16 @@ int main()
 		}
 	}*/
 	
-	
-	
+	School sh("xxxx");
+	ifstream is("1.txt");
+	string s;
+	getline(is, s);
+	Teacher t;
+	t.readFromString(s);	
+	Teacher t1("dfgg", "dffggh", 1, date_(14, 11, 1986));	
+
+	sh.readTeachersFromFile("1.txt");
+	sh.writeTeachersToFile("2.txt");
 
 	system("pause");
 	return 0;

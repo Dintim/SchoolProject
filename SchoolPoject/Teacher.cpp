@@ -1,11 +1,11 @@
 #include "Teacher.h"
 
+int Teacher::seqIdTeacher = 0;
 
-
-Teacher::Teacher(int idTeacher, string firstName, string surname, bool sex, date_ birthDay)
+Teacher::Teacher(string firstName, string surname, bool sex, date_ birthDay)
 	:Human(firstName, surname, sex, birthDay)
 {
-	this->idTeacher = idTeacher;
+	this->idTeacher = ++seqIdTeacher;	
 	this->status = "работает";
 }
 
@@ -29,20 +29,16 @@ void Teacher::info() const
 
 string Teacher::convertToString()
 {
-	string res = Human::convertToString();
-	res += to_string(idTeacher) + ";";	
-	res += status + ";";
+	string res = to_string(idTeacher) + ';';	
+	res += Human::convertToString();
+	res += status + ';';
 	return res;
 }
 
 void Teacher::readFromString(string & str)
 {
+	this->idTeacher = stoi(str.substr(0, str.find(';')));
+	str = str = str.substr(str.find(';') + 1);
 	Human::readFromString(str);
-	vector<string> v(2);
-	for (auto& i : v) {
-		i = str.substr(0, str.find(';'));
-		str = str.substr(str.find(';') + 1);
-	}
-	this->idTeacher = stoi(v[0]);
-	this->status = v[1];
+	this->status = str.substr(0, str.find(';'));	
 }
