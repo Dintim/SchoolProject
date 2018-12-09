@@ -14,7 +14,9 @@ void School::setSchoolName(string schoolName)
 
 void School::addStudent(Student & st)
 {
-	students.push_back(st);
+	int s = getCntStudents();
+	st.setIdStudent(++s);
+	students.push_back(st);	
 }
 
 void School::delStudent(int idStudent)
@@ -30,6 +32,8 @@ void School::delStudent(int idStudent)
 
 void School::addTeacher(Teacher & t)
 {
+	int s = getCntTeachers();
+	t.setIdTeacher(++s);
 	teachers.push_back(t);
 }
 
@@ -103,8 +107,8 @@ void School::readStudentsFromFile(string fileName)
 		getline(is, s);
 		Student st;
 		st.readFromString(s);
-		students.push_back(st);
-	}
+		addStudent(st);		
+	}	
 	is.close();
 }
 
@@ -116,17 +120,7 @@ void School::readTeachersFromFile(string fileName)
 		getline(is, s);
 		Teacher t;
 		t.readFromString(s);
-		teachers.push_back(t);
+		addTeacher(t);		
 	}
 	is.close();
-}
-
-int cntStudents(const School & obj)
-{
-	return obj.getCntStudents();
-}
-
-int cntTeachers(const School & obj)
-{
-	return obj.getCntTeachers();
 }

@@ -97,15 +97,11 @@ int main()
 		}
 	}*/
 	
-	School sh("xxxx");
-	ifstream is("1.txt");
-	string s;
-	getline(is, s);
-	Teacher t;
-	t.readFromString(s);	
-	Teacher t1("dfgg", "dffggh", 1, date_(14, 11, 1986));	
-
-	sh.readTeachersFromFile("1.txt");
+	School sh("xxxx");	
+	sh.readTeachersFromFile("1.txt");	
+	Teacher t1("dfgg", "dffggh", 1, date_(14, 11, 1986));
+	sh.addTeacher(t1);
+	//t1.info();
 	sh.writeTeachersToFile("2.txt");
 
 	system("pause");

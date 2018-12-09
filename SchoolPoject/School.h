@@ -3,7 +3,7 @@
 #include "Teacher.h"
 #include <fstream>
 class School
-{
+{	
 	string schoolName;
 	vector<Student> students;
 	vector<Teacher> teachers;
@@ -25,6 +25,5 @@ public:
 	void readTeachersFromFile(string fileName);
 };
 
-int cntStudents(const School& obj);
-int cntTeachers(const School& obj);
+
 

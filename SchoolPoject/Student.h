@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include "Human.h"
+
 class Student :
 	public Human
 {
