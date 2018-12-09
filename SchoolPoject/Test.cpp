@@ -1,19 +1,26 @@
 #include "Test.h"
 
+int Test::seqIdTest = 0;
 
-
-Test::Test()
+Test::Test(string testName)
 {
-}
-
-Test::Test(int idTest)
-{
-	this->idTest = idTest;
+	this->testName = testName;
+	this->idTest = ++seqIdTest;
 }
 
 void Test::setIdTest(int idTest)
 {
 	this->idTest = idTest;
+}
+
+void Test::setTestName(string testName)
+{
+	this->testName = testName;
+}
+
+void Test::setTestMaxResult(int testMaxResult)
+{
+	this->testMaxResult = testMaxResult;
 }
 
 Question& Test::operator[](int number)

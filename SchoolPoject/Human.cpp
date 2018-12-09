@@ -32,10 +32,10 @@ void Human::setBirthDay(date_ birthDay)
 
 void Human::info() const
 {
-	cout << "First name: " << firstName << endl;
-	cout << "Surname: " << surname << endl;
-	cout << "Sex (male or not): " << boolalpha << sex << endl;
-	cout << "Birth day: " << birthDay << endl;
+	cout << "Имя: " << firstName << endl;
+	cout << "Фамилия: " << surname << endl;
+	cout << "Пол (1-муж, 0-жен): " << sex << endl;
+	cout << "Дата рождения: " << birthDay;	
 }
 
 string Human::convertToString()
@@ -45,4 +45,17 @@ string Human::convertToString()
 	res += to_string(sex) + ";";
 	res += birthDay.dateToString() + ";";
 	return res;
+}
+
+void Human::readFromString(string & str)
+{
+	vector<string> v(4);
+	for (auto&i : v) {
+		i = str.substr(0, str.find(';'));
+		str = str.substr(str.find(';') + 1);
+	}
+	this->firstName = v[0];
+	this->surname = v[1];
+	this->sex = stoi(v[2]);
+	this->birthDay = date_(v[3]);
 }

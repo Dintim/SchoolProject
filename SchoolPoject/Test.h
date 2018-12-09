@@ -4,15 +4,20 @@
 
 class Test
 {	
+	static int seqIdTest;
 	int idTest;
 	int quesNum = 0;
+	string testName;
 	map<int, Question> testQuestions;
-	int result;	
+	int testMaxResult;	
 public:
-	Test();
-	Test(int idTest);
+	Test(string testName);	
 	void setIdTest(int idTest);
-	int getIdTest()const { return this->idTest; }	
+	int getIdTest()const { return this->idTest; }
+	void setTestName(string testName);
+	string getTestName()const { return testName; }
+	void setTestMaxResult(int testMaxResult);
+	int getTestMaxResult()const { return testMaxResult; }
 	Question& operator[](int number);	
 	
 	void addQuestion(Question& ques);

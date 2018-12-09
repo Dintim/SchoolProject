@@ -11,7 +11,7 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Rus");
 
-	Question q;
+	/*Question q;
 	q.setQuesText("Как разговаривает собака?");
 	q.setAnswerChoice("1. гав-гав");
 	q.setAnswerChoice("2. мяу");
@@ -36,7 +36,7 @@ int main()
 	Test tt(123);
 	tt.addQuestion(q);
 	tt.addQuestion(q2);
-	tt.addQuestion(q3);
+	tt.addQuestion(q3);*/
 	/*tt.delQuestion(3);
 
 	cout << tt[1];
@@ -49,10 +49,12 @@ int main()
 	/*vector<string> vv = q.getAnswerChoice();
 	vector<int> x = q.getRightAnswers();
 	ostream_iterator<int> os(cout, "\n");
-	copy(begin(x), end(x), os);
+	copy(begin(x), end(x), os);*/
 
 	Teacher t(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
-	t.info();*/
+	t.setStatus("отпуск");
+	t.info();
+	cout << t.convertToString();
 
 	/*Teacher t1(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
 	Teacher t2(12, "Асель", "Ибрагимова", 0, date_(26, 5, 1983));
@@ -67,11 +69,12 @@ int main()
 	
 	//sh.getTeacher(12).info();
 
-	int ch;
+	/*int ch;
 	int res;
 	while (true) {
 		res = 0;
 		cout << "0 - exit, 1 - pass test\n";
+		system("cls");
 		cin >> ch;
 		if (ch == 0) break;
 		if (ch == 1) {			
@@ -91,7 +94,7 @@ int main()
 			}
 			cout << "твой результат: " << res << endl;
 		}
-	}
+	}*/
 	
 	
 	
