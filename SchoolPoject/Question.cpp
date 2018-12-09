@@ -16,24 +16,49 @@ void Question::setQuesText(string text)
 	this->quesText = text;
 }
 
-void Question::setAnswerChoice(string answer)
+void Question::addAnswerChoice(string answer)
 {
 	answerChoice.push_back(answer);
 }
 
-void Question::setRightAnswers(int var)
+void Question::addRightAnswers(int var)
 {
 	rightAnswers.push_back(var);
 }
 
 
-string Question::convertQuesToString()
+string Question::convertToString()
 {
-	string res = quesText+"\n";
+	string res = quesText+';';
 	for (auto &i : answerChoice) {
-		res += i + "\n";
+		res += i + ';';
+	}
+	for (auto&i : rightAnswers) {
+		res += to_string(i) + ';';
 	}
 	return res;
+}
+
+void Question::readFromString(string & str)
+{
+	int c = count(begin(str), end(str), ';');
+	string tmp;
+	vector<string> v;
+	for (size_t i = 0; i < c; i++)
+	{
+		tmp = str.substr(0, str.find(';'));
+		v.push_back(tmp);
+		str = str.substr(str.find(';') + 1);
+	}
+	quesText = v[0];
+	for (size_t i = 1; i < 4; i++)
+	{
+		addAnswerChoice(v[i]);
+	}
+	for (size_t i = 4; i < c; i++)
+	{
+		addRightAnswers(stoi(v[i]));
+	}
 }
 
 void Question::info()

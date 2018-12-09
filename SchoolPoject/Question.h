@@ -17,8 +17,8 @@ public:
 	Question();
 	Question(string question);
 	void setQuesText(string text);
-	void setAnswerChoice(string answer);	
-	void setRightAnswers(int var);	
+	void addAnswerChoice(string answer);	
+	void addRightAnswers(int var);	
 	
 	string getQuesText()const { return this->quesText; }	
 	vector<string>& getAnswerChoice() { return this->answerChoice; }
@@ -27,8 +27,9 @@ public:
 	int getCntAnswerChoice()const { return answerChoice.size(); }
 	int getCntRightAnswers()const { return rightAnswers.size(); }
 
-	string convertQuesToString();
-	virtual void info();	
+	string convertToString();
+	void readFromString(string& str);
+	void info();	
 };
 
 ostream&operator<<(ostream&os, const Question&obj);

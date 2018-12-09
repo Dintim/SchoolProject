@@ -1,5 +1,6 @@
 #pragma once
 #include "Question.h"
+#include <fstream>
 
 
 class Test
@@ -21,10 +22,14 @@ public:
 	Question& operator[](int number);	
 	
 	void addQuestion(Question& ques);
+	void addQuestionFromString(string& str);
 	void delQuestion(int number);
 	int getCntTestQuestions()const { return testQuestions.size(); }
 	auto getBeginTestQuestions()const { return begin(testQuestions); }
 	auto getEndTestQuestions()const { return end(testQuestions); }
+	string convertToString();
+	void readFromFile(string fileName);
+	void writeToFile(string fileName);
 	void print()const;	
 };
 
