@@ -34,7 +34,7 @@ string Question::convertToString()
 		res += i + ';';
 	}
 	for (auto&i : rightAnswers) {
-		res += to_string(i) + ';';
+		res += to_string(i) + '@';
 	}
 	return res;
 }
@@ -42,6 +42,7 @@ string Question::convertToString()
 void Question::readFromString(string & str)
 {
 	int c = count(begin(str), end(str), ';');
+	int k = count(begin(str), end(str), '@');
 	string tmp;
 	vector<string> v;
 	for (size_t i = 0; i < c; i++)
@@ -50,12 +51,18 @@ void Question::readFromString(string & str)
 		v.push_back(tmp);
 		str = str.substr(str.find(';') + 1);
 	}
+	for (size_t i = 0; i < k; i++)
+	{
+		tmp = str.substr(0, str.find('@'));
+		v.push_back(tmp);
+		str = str.substr(str.find('@') + 1);
+	}
 	quesText = v[0];
-	for (size_t i = 1; i < 4; i++)
+	for (size_t i = 1; i < c; i++)
 	{
 		addAnswerChoice(v[i]);
 	}
-	for (size_t i = 4; i < c; i++)
+	for (size_t i = c; i < c+k; i++)
 	{
 		addRightAnswers(stoi(v[i]));
 	}
@@ -77,6 +84,5 @@ ostream & operator<<(ostream & os, const Question & obj)
 	{
 		os << obj.getAnswer(i) << endl;
 	}	
-	return os;
-	// TODO: вставьте здесь оператор return
+	return os;	
 }

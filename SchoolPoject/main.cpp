@@ -44,7 +44,7 @@ int main()
 	Test tt2("животные");
 	tt2.readFromFile("3.txt");
 	//tt2.print();
-	tt.writeToFile("tests\\1.txt");
+	tt2.writeToFile("tests\\1.txt");
 
 	/*tt.delQuestion(3);
 
