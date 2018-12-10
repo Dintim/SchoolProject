@@ -23,6 +23,11 @@ void Test::setTestMaxResult(int testMaxResult)
 	this->testMaxResult = testMaxResult;
 }
 
+void Test::setIdCreator(int idCreator)
+{
+	this->idCreator = idCreator;
+}
+
 Question& Test::operator[](int number)
 {
 	return testQuestions.find(number)->second;	

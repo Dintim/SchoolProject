@@ -10,7 +10,8 @@ class Test
 	int quesNum = 0;
 	string testName;
 	map<int, Question> testQuestions;
-	int testMaxResult;	
+	int testMaxResult;
+	int idCreator;
 public:
 	Test(string testName);	
 	void setIdTest(int idTest);
@@ -19,6 +20,8 @@ public:
 	string getTestName()const { return testName; }
 	void setTestMaxResult(int testMaxResult);
 	int getTestMaxResult()const { return testMaxResult; }
+	void setIdCreator(int idCreator);
+	int getIdCreator()const { return idCreator; }
 	Question& operator[](int number);	
 	
 	void addQuestion(Question& ques);
