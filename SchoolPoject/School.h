@@ -20,6 +20,8 @@ public:
 	void delStudent(int idStudent);
 	void addTeacher(Teacher& t);
 	void delTeacher(int idTeacher);
+	const vector<Student>& getStudentsList()const { return students; }
+	const vector<Teacher>& getTeachersList()const { return teachers; }
 	const Student& getStudent(int idStudent)const;
 	const Teacher& getTeacher(int idTeacher) const;
 	int getCntStudents()const { return students.size(); }
