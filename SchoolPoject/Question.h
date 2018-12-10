@@ -21,9 +21,9 @@ public:
 	void addRightAnswers(int var);	
 	
 	string getQuesText()const { return this->quesText; }	
-	vector<string>& getAnswerChoice() { return this->answerChoice; }
+	const vector<string>& getAnswerChoice()const { return this->answerChoice; }
 	string getAnswer(int index)const { return answerChoice[index]; }
-	vector<int>& getRightAnswers() { return this->rightAnswers; }
+	const vector<int>& getRightAnswers()const { return this->rightAnswers; }
 	int getCntAnswerChoice()const { return answerChoice.size(); }
 	int getCntRightAnswers()const { return rightAnswers.size(); }
 

@@ -18,6 +18,10 @@ void Teacher::setStatus(string status)
 	this->status = status;
 }
 
+void Teacher::addTest(Test & t)
+{
+	idTests.push_back(t.getIdTest());
+}
 
 void Teacher::info() const
 {

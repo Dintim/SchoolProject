@@ -15,7 +15,8 @@ public:
 	int getIdTeacher()const { return idTeacher; }
 	void setStatus(string status);
 	string getStatus()const { return status; }
-	
+	void addTest(Test& t);
+	const vector<int>& getTestsList()const { return idTests; }
 
 	void info()const override;
 	string convertToString() override;
