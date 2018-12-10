@@ -1,11 +1,10 @@
 #include "Teacher.h"
 
-int Teacher::seqIdTeacher = 0;
+
 
 Teacher::Teacher(string firstName, string surname, bool sex, date_ birthDay)
 	:Human(firstName, surname, sex, birthDay)
-{
-	this->idTeacher = ++seqIdTeacher;	
+{	
 	this->status = "работает";
 }
 

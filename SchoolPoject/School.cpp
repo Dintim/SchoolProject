@@ -12,6 +12,11 @@ void School::setSchoolName(string schoolName)
 	this->schoolName = schoolName;
 }
 
+void School::setPassword(string password)
+{
+	this->password = password;
+}
+
 void School::addStudent(Student & st)
 {
 	int s = getCntStudents();

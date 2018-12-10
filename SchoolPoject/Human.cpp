@@ -30,6 +30,11 @@ void Human::setBirthDay(date_ birthDay)
 	this->birthDay = birthDay;
 }
 
+void Human::setPassword(string password)
+{
+	this->password = password;
+}
+
 void Human::info() const
 {
 	cout << "Èìÿ: " << firstName << endl;
@@ -44,12 +49,13 @@ string Human::convertToString()
 	res += surname + ';';
 	res += to_string(sex) + ';';
 	res += birthDay.dateToString() + ';';
+	res += password + ';';
 	return res;
 }
 
 void Human::readFromString(string & str)
 {
-	vector<string> v(4);
+	vector<string> v(5);
 	for (auto&i : v) {
 		i = str.substr(0, str.find(';'));
 		str = str.substr(str.find(';') + 1);
@@ -58,4 +64,5 @@ void Human::readFromString(string & str)
 	this->surname = v[1];
 	this->sex = stoi(v[2]);
 	this->birthDay = date_(v[3]);
+	this->password = v[4];
 }

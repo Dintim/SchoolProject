@@ -7,10 +7,15 @@ class School
 	string schoolName;
 	vector<Student> students;
 	vector<Teacher> teachers;
+	string password;
 public:
 	School(string schoolName);
 
 	void setSchoolName(string schoolName);
+	string getSchoolName()const { return schoolName; }
+	void setPassword(string password);
+	string getPassword()const { return password; }
+
 	void addStudent(Student& st);
 	void delStudent(int idStudent);
 	void addTeacher(Teacher& t);

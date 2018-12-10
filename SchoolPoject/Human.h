@@ -12,19 +12,22 @@ class Human abstract
 	string firstName;
 	string surname;
 	bool sex;
-	date_ birthDay;	
+	date_ birthDay;
+	string password;
 public:
 	Human(string firstName, string surname, bool sex, date_ birthDay);
 	Human() = default;
 	void setFirstName(string firstName);
 	void setSurname(string surname);
 	void setSex(bool sex);
-	void setBirthDay(date_ birthDay);	
+	void setBirthDay(date_ birthDay);
+	void setPassword(string password);
 
 	string getFirstName()const { return firstName; }
 	string getSurname()const { return surname; }
 	bool getSex()const { return sex; }
-	date_ getBirthDay()const { return birthDay; }	
+	date_ getBirthDay()const { return birthDay; }
+	string getPassword()const { return password; }
 
 	virtual void info()const;
 	virtual string convertToString();

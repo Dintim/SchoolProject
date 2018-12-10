@@ -1,12 +1,11 @@
 #include "Student.h"
 
-int Student::seqIdStudent = 0;
+
 
 Student::Student(string firstName, string surname, bool sex, date_ birthDay)
 	:Human(firstName, surname, sex, birthDay)
-{
-	this->idStudent = ++seqIdStudent;
-	this->status = "учится";
+{	
+	this->status = "студент";
 }
 
 void Student::setIdStudent(int idStudent)

@@ -3,8 +3,7 @@
 
 class Teacher :
 	public Human
-{
-	static int seqIdTeacher;
+{	
 	int idTeacher;
 	string status;
 public:

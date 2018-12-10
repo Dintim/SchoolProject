@@ -3,10 +3,9 @@
 #include "Test.h"
 #include "Teacher.h"
 #include "School.h"
-#include <fstream>
 #include <iterator>
-#include <string>
-#include <iostream>
+
+
 
 
 int main()

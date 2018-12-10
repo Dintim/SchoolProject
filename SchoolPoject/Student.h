@@ -4,8 +4,7 @@
 
 class Student :
 	public Human
-{
-	static int seqIdStudent;
+{	
 	int idStudent;
 	string status;
 public:
