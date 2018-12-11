@@ -53,6 +53,11 @@ void School::delTeacher(int idTeacher)
 		return;
 }
 
+void School::addTester(Tester & t) //++
+{
+	testers.push_back(t);
+}
+
 const Student & School::getStudent(int idStudent) const
 {
 	for (size_t i = 0; i < students.size(); i++)

@@ -18,8 +18,9 @@ void Teacher::setStatus(string status)
 	this->status = status;
 }
 
-void Teacher::addTest(Test & t)
+void Teacher::addTest(Test & t) //++
 {
+	t.setIdCreator(idTeacher);
 	idTests.push_back(t.getIdTest());
 }
 

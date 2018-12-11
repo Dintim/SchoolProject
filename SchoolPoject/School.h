@@ -1,12 +1,14 @@
 #pragma once
 #include "Student.h"
 #include "Teacher.h"
+#include "Tester.h"
 #include <fstream>
 class School
 {	
 	string schoolName;
 	vector<Student> students;
 	vector<Teacher> teachers;
+	vector<Tester> testers; //++
 	string password;
 public:
 	School(string schoolName);
@@ -20,6 +22,7 @@ public:
 	void delStudent(int idStudent);
 	void addTeacher(Teacher& t);
 	void delTeacher(int idTeacher);
+	void addTester(Tester& t); //++
 	const vector<Student>& getStudentsList()const { return students; }
 	const vector<Teacher>& getTeachersList()const { return teachers; }
 	const Student& getStudent(int idStudent)const;
