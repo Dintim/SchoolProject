@@ -57,7 +57,7 @@ void Test::delQuestion(int number)
 	}
 }
 
-string Test::convertToString()
+string Test::convertToString() //++
 {
 	string res = to_string(idTest) + '\n';
 	res += testName + '\n';
@@ -65,11 +65,12 @@ string Test::convertToString()
 	for (auto&i : testQuestions) {
 		res += i.second.convertToString()+'\n';		
 	}
-	res += to_string(testMaxResult);
+	res += to_string(testMaxResult)+'\n';
+	res += to_string(idCreator);
 	return res;
 }
 
-void Test::readFromFile(string fileName)
+void Test::readFromFile(string fileName) //++
 {
 	ifstream is(fileName);
 	vector<string> v;
@@ -86,7 +87,8 @@ void Test::readFromFile(string fileName)
 		q.readFromString(v[i]);
 		addQuestion(q);
 	}
-	testMaxResult = stoi(v[v.size()-1]);
+	testMaxResult = stoi(v[v.size()-2]);
+	idCreator = stoi(v[v.size() - 1]);
 	is.close();
 }
 
