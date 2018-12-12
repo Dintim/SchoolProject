@@ -3,6 +3,7 @@
 #include "Test.h"
 #include "Teacher.h"
 #include "School.h"
+#include "Viewer.h"
 #include <iterator>
 
 
@@ -13,6 +14,10 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Rus");
+
+	/*Viewer v;
+	v.LogIn();*/
+
 
 	/*Question q;
 	q.setQuesText("Как разговаривает собака?");
@@ -46,26 +51,9 @@ int main()
 	tt2.print();*/
 	//tt2.writeToFile("tests\\1.txt");
 
-	/*tt.delQuestion(3);
-
-	cout << tt[1];
-
-	Test tt2(456);
-	tt2.addQuestion(q3);	
-
-	tt2.print();*/
-
-	/*vector<string> vv = q.getAnswerChoice();
-	vector<int> x = q.getRightAnswers();
-	ostream_iterator<int> os(cout, "\n");
-	copy(begin(x), end(x), os);*/
-
-	/*Teacher t(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
-	t.setStatus("отпуск");
-	t.info();
-	cout << t.convertToString();*/
-
-	Teacher t1("Динара", "Мукашева", 0, date_(22, 5, 1983), "123");
+	
+	
+	/*Teacher t1("Динара", "Мукашева", 0, date_(22, 5, 1983), "123");
 	Teacher t2("Асель", "Ибрагимова", 0, date_(26, 5, 1983), "456");
 	Teacher t3("Тимур", "Кадырбаев", 1, date_(18, 6, 1970), "777");
 
@@ -77,7 +65,10 @@ int main()
 	sh.readTeachersFromFile();
 	sh.writeTeachersToFile();
 	
-	//sh.getTeacher(12).info();
+	vector<string> v = sh.getTeacherStatus();
+	for (auto&i : v) {
+		cout << i << endl;
+	}*/
 
 	/*int ch;
 	int res;
