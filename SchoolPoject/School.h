@@ -35,10 +35,16 @@ public:
 	int getCntTeachers()const { return teachers.size(); }
 	const vector<string>& getStudentStatus()const { return studentStatus; } //++
 	const vector<string>& getTeacherStatus()const { return teacherStatus; } //++
+	
 	void writeStudentsToFile(); //++
 	void writeTeachersToFile(); //++
+	void writeTestersToFile(); //++
+	void writeListTestsToFile(); //++
+
 	void readStudentsFromFile(); //++
 	void readTeachersFromFile(); //++
+	void readTestersFromFile(); //++
+	void readListTestsFromFile(); //++
 };
 
 

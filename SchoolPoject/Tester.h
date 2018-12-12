@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+#include <vector>
+using namespace std;
 
 class Tester
 {
@@ -10,5 +13,7 @@ public:
 	void setIdStudent(int idStudent);
 	void setIdTest(int idTest);
 	void setTestResult(int res);
+	void readFromString(string& str); //++
+	string convertToString(); //++
 };
 

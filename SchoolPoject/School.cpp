@@ -123,6 +123,34 @@ void School::writeTeachersToFile() //++
 	os.close();
 }
 
+void School::writeTestersToFile() //++
+{
+	ofstream os("testers");
+	string s;
+	for (auto i = begin(testers); i != end(testers); i++)
+	{
+		s = i->convertToString();
+		os << s;
+		if (i != end(testers) - 1)
+			os << endl;
+	}
+	os.close();
+}
+
+void School::writeListTestsToFile() //++
+{
+	ofstream os("listTest");
+	string s;	
+	for (auto i = begin(listTests); i != end(listTests); i++)
+	{
+		s = i->convertToString();
+		os << s;
+		if (i != end(listTests) - 1)
+			os << endl;
+	}
+	os.close();
+}
+
 void School::readStudentsFromFile() //++
 {
 	ifstream is("students");
@@ -145,6 +173,32 @@ void School::readTeachersFromFile() //++
 		Teacher t;
 		t.readFromString(s);
 		addTeacher(t);		
+	}
+	is.close();
+}
+
+void School::readTestersFromFile() //++
+{
+	ifstream is("testers");
+	string s;
+	while (!is.eof()) {
+		getline(is, s);
+		Tester t;
+		t.readFromString(s);
+		addTester(t);
+	}
+	is.close();
+}
+
+void School::readListTestsFromFile() //++
+{
+	ifstream is("listTest");
+	string s;
+	while (!is.eof()) {
+		getline(is, s);
+		ListTests lt;
+		lt.readFromString(s);
+		addListTests(lt);
 	}
 	is.close();
 }
