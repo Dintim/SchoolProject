@@ -2,12 +2,13 @@
 
 
 
-Human::Human(string firstName, string surname, bool sex, date_ birthDay)
+Human::Human(string firstName, string surname, bool sex, date_ birthDay, string password)
 {
 	this->firstName = firstName;
 	this->surname = surname;
 	this->sex = sex;
 	this->birthDay = birthDay;
+	this->password = password;
 }
 
 void Human::setFirstName(string firstName)

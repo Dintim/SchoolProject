@@ -2,8 +2,8 @@
 
 
 
-Teacher::Teacher(string firstName, string surname, bool sex, date_ birthDay)
-	:Human(firstName, surname, sex, birthDay)
+Teacher::Teacher(string firstName, string surname, bool sex, date_ birthDay, string password)
+	:Human(firstName, surname, sex, birthDay, password)
 {	
 	this->status = "работает";
 }

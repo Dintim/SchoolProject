@@ -8,7 +8,7 @@ class Student :
 	int idStudent;
 	string status;
 public:
-	Student(string firstName, string surname, bool sex, date_ birthDay);
+	Student(string firstName, string surname, bool sex, date_ birthDay, string password);
 	Student() = default;
 	void setIdStudent(int idStudent);	
 	int getIdStudent()const { return idStudent; }

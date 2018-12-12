@@ -15,7 +15,7 @@ class Human abstract
 	date_ birthDay;
 	string password;
 public:
-	Human(string firstName, string surname, bool sex, date_ birthDay);
+	Human(string firstName, string surname, bool sex, date_ birthDay, string password);
 	Human() = default;
 	void setFirstName(string firstName);
 	void setSurname(string surname);

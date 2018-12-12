@@ -9,7 +9,7 @@ class Teacher :
 	string status;
 	vector<int> idTests;
 public:
-	Teacher(string firstName, string surname, bool sex, date_ birthDay);
+	Teacher(string firstName, string surname, bool sex, date_ birthDay, string password);
 	Teacher() = default;
 	void setIdTeacher(int idTeacher);	
 	int getIdTeacher()const { return idTeacher; }

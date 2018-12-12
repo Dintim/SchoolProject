@@ -14,7 +14,7 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Rus");
 
-	Question q;
+	/*Question q;
 	q.setQuesText("Как разговаривает собака?");
 	q.addAnswerChoice("1. гав-гав");
 	q.addAnswerChoice("2. мяу");
@@ -43,7 +43,7 @@ int main()
 	
 	Test tt2("животные");
 	tt2.readFromFile("3.txt");
-	tt2.print();
+	tt2.print();*/
 	//tt2.writeToFile("tests\\1.txt");
 
 	/*tt.delQuestion(3);
@@ -65,16 +65,17 @@ int main()
 	t.info();
 	cout << t.convertToString();*/
 
-	/*Teacher t1(14, "Динара", "Мукашева", 0, date_(22, 5, 1983));
-	Teacher t2(12, "Асель", "Ибрагимова", 0, date_(26, 5, 1983));
-	Teacher t3(15, "Тимур", "Кадырбаев", 1, date_(18, 6, 1970));
+	Teacher t1("Динара", "Мукашева", 0, date_(22, 5, 1983), "123");
+	Teacher t2("Асель", "Ибрагимова", 0, date_(26, 5, 1983), "456");
+	Teacher t3("Тимур", "Кадырбаев", 1, date_(18, 6, 1970), "777");
 
 	School sh("ITSTEP");
 	sh.addTeacher(t1);
 	sh.addTeacher(t2);
 	sh.addTeacher(t3);
 	sh.delTeacher(11);
-	cout << sh.getCntTeachers();*/	
+	sh.readTeachersFromFile();
+	sh.writeTeachersToFile();
 	
 	//sh.getTeacher(12).info();
 

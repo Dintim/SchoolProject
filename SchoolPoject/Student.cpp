@@ -2,8 +2,8 @@
 
 
 
-Student::Student(string firstName, string surname, bool sex, date_ birthDay)
-	:Human(firstName, surname, sex, birthDay)
+Student::Student(string firstName, string surname, bool sex, date_ birthDay, string password)
+	:Human(firstName, surname, sex, birthDay, password)
 {	
 	this->status = "студент";
 }
