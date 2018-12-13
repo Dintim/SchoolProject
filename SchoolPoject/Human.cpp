@@ -31,6 +31,13 @@ void Human::setBirthDay(date_ birthDay)
 	this->birthDay = birthDay;
 }
 
+void Human::setBirthDay(int day, int month, int year)
+{
+	this->birthDay.setDay(day);
+	this->birthDay.setMonth(month);
+	this->birthDay.setYear(year);
+}
+
 void Human::setPassword(string password)
 {
 	this->password = password;

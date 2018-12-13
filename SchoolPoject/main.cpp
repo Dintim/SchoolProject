@@ -49,30 +49,33 @@ int main()
 	tt2.print();*/
 	//tt2.writeToFile("tests\\1.txt");
 
-	ListTests lt1(11, "sdff", 451);
+	/*ListTests lt1(11, "sdff", 451);
 	ListTests lt2(22, "asdd", 888);
 		
 
 	School sh("ITSTEP");
 	sh.addListTests(lt1);
 	sh.addListTests(lt2);
-	sh.writeListTestsToFile();
+	sh.writeListTestsToFile();*/
 
 	
 	
 	
 
+	Test tt("");
+	tt.readFromFile("tests\\1");
+	tt.print();
 	/*int ch;
 	int res;
 	while (true) {
 		res = 0;
 		cout << "0 - exit, 1 - pass test\n";
-		system("cls");
 		cin >> ch;
 		if (ch == 0) break;
 		if (ch == 1) {			
 			for (auto i = tt.getBeginTestQuestions(); i != tt.getEndTestQuestions(); i++)
 			{
+				system("cls");
 				cout << tt[i->first];
 				cout << "Твои варианты ответов (0 - exit):\n";
 				vector<int> myAnswers;
@@ -89,8 +92,6 @@ int main()
 		}
 	}*/
 	
-	
-
 	
 
 
