@@ -511,6 +511,7 @@ void Viewer::addTest(int id) //++
 	}
 	int x = sch.getCntListTests();
 	t.setIdTest(++x);
+	t.setTestMaxResult(t.sumRightAnswers());
 	clearScreen();
 	gotoXY(15, 5); green();
 	cout << "Тест создан!";

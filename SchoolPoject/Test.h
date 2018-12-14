@@ -13,7 +13,8 @@ class Test
 	int testMaxResult;
 	int idCreator;
 public:
-	Test(string testName);	
+	Test(string testName);
+	Test() = default;
 	void setIdTest(int idTest);
 	int getIdTest()const { return this->idTest; }
 	void setTestName(string testName);
@@ -33,6 +34,7 @@ public:
 	string convertToString();
 	void readFromFile(string fileName);
 	void writeToFile(); //++
+	int sumRightAnswers()const; //++
 	void print()const;	
 };
 
