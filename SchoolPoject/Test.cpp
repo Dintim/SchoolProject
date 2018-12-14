@@ -92,9 +92,10 @@ void Test::readFromFile(string fileName) //++
 	is.close();
 }
 
-void Test::writeToFile(string fileName)
+void Test::writeToFile() //++
 {
-	ofstream os(fileName);
+	string name = "tests\\" + to_string(idTest);
+	ofstream os(name);
 	string str = convertToString();
 	os << str;
 	os.close();

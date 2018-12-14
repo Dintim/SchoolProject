@@ -32,7 +32,7 @@ public:
 	auto getEndTestQuestions()const { return end(testQuestions); }
 	string convertToString();
 	void readFromFile(string fileName);
-	void writeToFile(string fileName);
+	void writeToFile(); //++
 	void print()const;	
 };
 

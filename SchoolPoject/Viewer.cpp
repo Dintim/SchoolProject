@@ -519,10 +519,9 @@ void Viewer::addTest(int id) //++
 	vector<string> v = { "да","нет" };
 	int s = choice(v, 15, 9);
 	if (s == 1) 
-	{
-		//string name = "tests\\" + to_string(5);
-		string name = "tests\\" + to_string(t.getIdTest());
-		t.writeToFile(name);
+	{		
+		//string name = "tests\\" + to_string(t.getIdTest());
+		t.writeToFile();
 	}	
 	ListTests lt(t.getIdTest(), t.getTestName(), t.getIdCreator());
 	sch.addListTests(lt);
