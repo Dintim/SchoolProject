@@ -27,5 +27,6 @@ public:
 
 	void addTest(int id); //++
 	void addQuesToTest(Test& t); //++
+	void addAnswers(Question& q, int quesNum); //++
 };
 
