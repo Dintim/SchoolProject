@@ -504,10 +504,8 @@ void Viewer::addTest(int id) //++
 		int s = choice(v, 15, 9);
 		if (s == 2)
 			break;
-		if (s == 1) 
-		{			
-			addQuesToTest(t);
-		}		
+		if (s == 1) 		
+			addQuesToTest(t);	
 	}
 	int x = sch.getCntListTests();
 	t.setIdTest(++x);
@@ -546,22 +544,33 @@ void Viewer::addQuesToTest(Test& t) //++
 		while (k < 3) 
 		{
 			addAnswers(q, k);
-			k++;
+			k++;			
 		}
 		clearScreen();
 		gotoXY(15, 8); white();
 		cout << "Добавить еще вариант ответа?";
 		vector<string> v = { "да", "нет" };
 		int s = choice(v, 15, 9);
-		if (s == 2)
-			break;
+		if (s == 2) {
+			if (q.getCntRightAnswers()!=0)
+				break;
+			else
+			{
+				clearScreen();
+				gotoXY(15, 8);
+				cout << "Вы не отметили ни одного правильного ответа. Введите заново";
+				k = 1;
+				Sleep(1000);
+				continue;
+			}
+		}
 		if (s == 1)
 		{
 			addAnswers(q, k);
 			k++;			
 		}		
-	}
-	t.addQuestion(q);
+	}	
+	t.addQuestion(q);	
 }
 
 void Viewer::addAnswers(Question & q, int quesNum) //++
