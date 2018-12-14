@@ -210,3 +210,14 @@ void School::readListTestsFromFile()
 	}
 	is.close();
 }
+
+const ListTests & School::getListTests(int idCreator) const //++
+{
+	for (size_t i = 0; i < listTests.size(); i++)
+	{
+		if (listTests[i].getIdCreator()==idCreator)
+			return listTests[i];
+	}
+	ListTests lt;
+	return lt;	
+}

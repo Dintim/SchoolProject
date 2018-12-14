@@ -443,7 +443,7 @@ void Viewer::menuT(int id)
 	}
 	else if (m == 2)
 	{
-
+		showMyTests(id);
 	}
 	else if (m == 3)
 	{
@@ -524,6 +524,7 @@ void Viewer::addTest(int id) //++
 	}	
 	ListTests lt(t.getIdTest(), t.getTestName(), t.getIdCreator());
 	sch.addListTests(lt);
+	sch.writeListTestsToFile();
 }
 
 void Viewer::addQuesToTest(Test& t) //++
@@ -589,4 +590,10 @@ void Viewer::addAnswers(Question & q, int quesNum) //++
 	if (ss == 1)
 		q.addRightAnswers(quesNum);
 	q.addAnswerChoice(answer);
+}
+
+void Viewer::showMyTests(int id)
+{
+	sch.readListTestsFromFile();
+
 }

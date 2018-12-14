@@ -23,8 +23,8 @@ public:
 	void delStudent(int idStudent);
 	void addTeacher(Teacher& t);
 	void delTeacher(int idTeacher);
-	void addTester(Tester& t); //++
-	void addListTests(ListTests& lt); //++
+	void addTester(Tester& t); 
+	void addListTests(ListTests& lt); 
 	const vector<Student>& getStudentsList()const { return students; }
 	const vector<Teacher>& getTeachersList()const { return teachers; }
 	const Student& getStudent(int idStudent)const;
@@ -47,7 +47,8 @@ public:
 	void readListTestsFromFile(); 
 
 	int getCntTesters()const { return testers.size(); } //++
-	int getCntListTests()const { return listTests.size(); } //++
+	int getCntListTests()const { return listTests.size(); } //++	
+	const ListTests& getListTests(int idCreator)const; //++
 };
 
 
