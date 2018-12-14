@@ -33,18 +33,21 @@ public:
 	const Teacher& getTeacher(string surname) const;
 	int getCntStudents()const { return students.size(); }
 	int getCntTeachers()const { return teachers.size(); }
-	const vector<string>& getStudentStatus()const { return studentStatus; } //++
-	const vector<string>& getTeacherStatus()const { return teacherStatus; } //++
+	const vector<string>& getStudentStatus()const { return studentStatus; } 
+	const vector<string>& getTeacherStatus()const { return teacherStatus; } 
 	
-	void writeStudentsToFile(); //++
-	void writeTeachersToFile(); //++
-	void writeTestersToFile(); //++
-	void writeListTestsToFile(); //++
+	void writeStudentsToFile(); 
+	void writeTeachersToFile(); 
+	void writeTestersToFile(); 
+	void writeListTestsToFile(); 
 
-	void readStudentsFromFile(); //++
-	void readTeachersFromFile(); //++
-	void readTestersFromFile(); //++
-	void readListTestsFromFile(); //++
+	void readStudentsFromFile(); 
+	void readTeachersFromFile(); 
+	void readTestersFromFile(); 
+	void readListTestsFromFile(); 
+
+	int getCntTesters()const { return testers.size(); } //++
+	int getCntListTests()const { return listTests.size(); } //++
 };
 
 

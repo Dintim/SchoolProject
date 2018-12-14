@@ -13,8 +13,8 @@ int main()
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Rus");
 
-	/*Viewer v;
-	v.LogIn();*/
+	Viewer v;
+	v.menuT(1);
 
 
 	/*Question q;
@@ -62,10 +62,10 @@ int main()
 	
 	
 
-	Test tt("");
+	/*Test tt("");
 	tt.readFromFile("tests\\1");
 	tt.print();
-	/*int ch;
+	int ch;
 	int res;
 	while (true) {
 		res = 0;

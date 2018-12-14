@@ -13,7 +13,7 @@ public:
 	void setIdStudent(int idStudent);
 	void setIdTest(int idTest);
 	void setTestResult(int res);
-	void readFromString(string& str); //++
-	string convertToString(); //++
+	void readFromString(string& str); 
+	string convertToString(); 
 };
 

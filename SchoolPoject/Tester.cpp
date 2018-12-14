@@ -24,7 +24,7 @@ void Tester::setTestResult(int res)
 	this->testResult = testResult;
 }
 
-void Tester::readFromString(string & str) //++
+void Tester::readFromString(string & str) 
 {	
 	vector<int> v(3);
 	for (auto& i : v) {
@@ -36,7 +36,7 @@ void Tester::readFromString(string & str) //++
 	this->testResult = v[2];
 }
 
-string Tester::convertToString() //++
+string Tester::convertToString() 
 {	
 	string res = to_string(idStudent) + ';';
 	res += to_string(idTest) + ';';

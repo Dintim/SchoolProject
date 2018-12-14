@@ -15,6 +15,17 @@ public:
 	void white();
 	void red();
 	void green();
-	void GotoXY(int X, int Y);
+	void gotoXY(int X, int Y);
+	COORD getPos();
 	void clearScreen()const { system("cls"); }
+	string pasEntry();
+	int intEntry(int c, bool e);
+	int choice(vector<string> ch, int x, int y);
+	void menuA();
+	void menuT(int id);
+	void menuS(int id);
+
+	void addTest(int id); //++
+	void addQuesToTest(Test& t); //++
 };
+

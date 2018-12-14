@@ -49,12 +49,12 @@ void School::delTeacher(int idTeacher)
 		return;
 }
 
-void School::addTester(Tester & t) //++
+void School::addTester(Tester & t) 
 {
 	testers.push_back(t);
 }
 
-void School::addListTests(ListTests & lt) //++
+void School::addListTests(ListTests & lt) 
 {
 	listTests.push_back(lt);
 }
@@ -66,6 +66,8 @@ const Student & School::getStudent(int idStudent) const
 		if (students[i].getIdStudent() == idStudent)
 			return students[i];
 	}
+	Student st;
+	return st;
 }
 
 const Student & School::getStudent(string surname) const
@@ -75,6 +77,8 @@ const Student & School::getStudent(string surname) const
 		if (students[i].getSurname() == surname)
 			return students[i];
 	}
+	Student st;
+	return st;
 }
 
 const Teacher & School::getTeacher(int idTeacher) const
@@ -84,6 +88,8 @@ const Teacher & School::getTeacher(int idTeacher) const
 		if (teachers[i].getIdTeacher() == idTeacher)
 			return teachers[i];
 	}
+	Teacher t;
+	return t;
 }
 
 const Teacher & School::getTeacher(string surname) const
@@ -93,9 +99,11 @@ const Teacher & School::getTeacher(string surname) const
 		if (teachers[i].getSurname() == surname)
 			return teachers[i];
 	}
+	Teacher t;
+	return t;
 }
 
-void School::writeStudentsToFile() //++
+void School::writeStudentsToFile()
 {
 	ofstream os("students");
 	string s;
@@ -109,7 +117,7 @@ void School::writeStudentsToFile() //++
 	os.close();
 }
 
-void School::writeTeachersToFile() //++
+void School::writeTeachersToFile() 
 {
 	ofstream os("teachers");
 	string s;
@@ -123,7 +131,7 @@ void School::writeTeachersToFile() //++
 	os.close();
 }
 
-void School::writeTestersToFile() //++
+void School::writeTestersToFile() 
 {
 	ofstream os("testers");
 	string s;
@@ -137,7 +145,7 @@ void School::writeTestersToFile() //++
 	os.close();
 }
 
-void School::writeListTestsToFile() //++
+void School::writeListTestsToFile()
 {
 	ofstream os("listTest");
 	string s;	
@@ -151,7 +159,7 @@ void School::writeListTestsToFile() //++
 	os.close();
 }
 
-void School::readStudentsFromFile() //++
+void School::readStudentsFromFile() 
 {
 	ifstream is("students");
 	string s;
@@ -164,7 +172,7 @@ void School::readStudentsFromFile() //++
 	is.close();
 }
 
-void School::readTeachersFromFile() //++
+void School::readTeachersFromFile() 
 {
 	ifstream is("teachers");
 	string s;
@@ -177,7 +185,7 @@ void School::readTeachersFromFile() //++
 	is.close();
 }
 
-void School::readTestersFromFile() //++
+void School::readTestersFromFile() 
 {
 	ifstream is("testers");
 	string s;
@@ -190,7 +198,7 @@ void School::readTestersFromFile() //++
 	is.close();
 }
 
-void School::readListTestsFromFile() //++
+void School::readListTestsFromFile() 
 {
 	ifstream is("listTest");
 	string s;

@@ -24,7 +24,7 @@ void ListTests::setIdCreator(int idCreator)
 	this->idCreator = idCreator;
 }
 
-void ListTests::readFromString(string & str) //++
+void ListTests::readFromString(string & str) 
 {
 	vector<string> v(3);
 	for (auto& i : v) {
@@ -36,7 +36,7 @@ void ListTests::readFromString(string & str) //++
 	this->idCreator = stoi(v[2]);
 }
 
-string ListTests::convertToString() //++
+string ListTests::convertToString() 
 {	
 	string res = to_string(idTest) + ';';
 	res += testName + ';';

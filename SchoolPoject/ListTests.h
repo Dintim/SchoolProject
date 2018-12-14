@@ -16,7 +16,7 @@ public:
 	int getIdTest()const { return idTest; }
 	string getTestName()const { return testName; }
 	int getIdCreator()const { return idCreator; }
-	void readFromString(string& str); //++
-	string convertToString(); //++
+	void readFromString(string& str); 
+	string convertToString(); 
 };
 
