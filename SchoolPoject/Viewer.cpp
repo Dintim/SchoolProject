@@ -512,7 +512,9 @@ void Viewer::addTest(int id) //++
 	if (s == 1) {
 		string name = "tests\\" + to_string(t.getIdTest());
 		t.writeToFile(name);
-	}
+	}	
+	ListTests lt(t.getIdTest(), t.getTestName(), t.getIdCreator());
+	sch.addListTests(lt);
 }
 
 void Viewer::addQuesToTest(Test& t) //++
