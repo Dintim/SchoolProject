@@ -101,7 +101,7 @@ void Test::writeToFile() //++
 	os.close();
 }
 
-int Test::sumRightAnswers() const
+int Test::sumRightAnswers() const //++
 {
 	int sum = 0;
 	for (auto&i : testQuestions) {
