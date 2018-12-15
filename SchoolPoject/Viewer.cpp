@@ -431,10 +431,10 @@ void Viewer::menuT(int id) //++
 		green();
 		cout << "Добро пожаловать в консоль преподавателя ITStep!";
 		gotoXY(15, 8);
-		vector<string> st1 = { "Добавить тест", "Список тестов", "Список студентов", "Выйти" };
+		vector<string> st1 = { "Добавить тест", "Список тестов", "Выйти" };
 		int m = 1;
 		m = choice(st1, 15, 8);
-		if (m == 4)
+		if (m == 3)
 		{
 			LogIn();
 		}
@@ -445,11 +445,7 @@ void Viewer::menuT(int id) //++
 		else if (m == 2)
 		{
 			showMyTests(id);
-		}
-		else if (m == 3)
-		{
-
-		}
+		}		
 	}
 }
 

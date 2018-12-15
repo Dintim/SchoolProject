@@ -34,7 +34,7 @@ public:
 	map<int, Question>& getTestQuestions() { return testQuestions; } //++
 	string convertToString();
 	void readFromFile(string fileName);
-	void writeToFile(); //++
+	void writeToFile(); 
 	int sumRightAnswers()const; //++
 	void print()const;	
 };
