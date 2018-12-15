@@ -36,5 +36,6 @@ public:
 	void changeQuestion(Test &t, int quesNum); //++
 	void changeVarQuestion(Question& q); //++
 	void changeRightAnswers(Question& q); //++
+	void delQuesFromTest(Test& t); //++
 };
 

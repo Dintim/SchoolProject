@@ -423,31 +423,33 @@ void Viewer::menuA()
 	cout << "Admin";
 }
 
-void Viewer::menuT(int id)
+void Viewer::menuT(int id) //++
 {
-	clearScreen();
-	gotoXY(15, 5);
-	green();
-	cout << "Добро пожаловать в ITStep!";
-	gotoXY(15, 8);
-	vector<string> st1 = { "Добавить тест", "Список тестов", "Список студентов", "Выйти" };
-	int m = 1;
-	m = choice(st1, 15, 8);
-	if (m == 4)
-	{
-		LogIn();
-	}
-	else if (m == 1)
-	{
-		addTest(id);
-	}
-	else if (m == 2)
-	{
-		showMyTests(id);
-	}
-	else if (m == 3)
-	{
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5);
+		green();
+		cout << "Добро пожаловать в консоль преподавателя ITStep!";
+		gotoXY(15, 8);
+		vector<string> st1 = { "Добавить тест", "Список тестов", "Список студентов", "Выйти" };
+		int m = 1;
+		m = choice(st1, 15, 8);
+		if (m == 4)
+		{
+			LogIn();
+		}
+		else if (m == 1)
+		{
+			addTest(id);
+		}
+		else if (m == 2)
+		{
+			showMyTests(id);
+		}
+		else if (m == 3)
+		{
 
+		}
 	}
 }
 
@@ -634,7 +636,7 @@ void Viewer::showMyTests(int id) //++
 	}
 }
 
-void Viewer::testMenu(int idTest)
+void Viewer::testMenu(int idTest) //++
 {
 	while (true) {
 		clearScreen();
@@ -700,7 +702,7 @@ void Viewer::studentsPassedTest(int idTest) //++
 		return;	
 }
 
-void Viewer::changeTest(int idTest)
+void Viewer::changeTest(int idTest) //++
 {
 	Test tmp;
 	tmp.readFromFile("tests\\" + to_string(idTest));
@@ -765,7 +767,7 @@ void Viewer::changeTest(int idTest)
 			Sleep(1000);
 		}
 		if (ch == 3) {
-
+			delQuesFromTest(tmp);
 		}
 		if (ch == 4) {
 			break;
@@ -775,7 +777,7 @@ void Viewer::changeTest(int idTest)
 	tmp.writeToFile();	
 }
 
-void Viewer::changeQuestion(Test& t, int quesNum)
+void Viewer::changeQuestion(Test& t, int quesNum) //++
 {
 	Question q = t[quesNum];
 	while (true) {
@@ -882,7 +884,7 @@ void Viewer::changeVarQuestion(Question & q) //++
 	}
 }
 
-void Viewer::changeRightAnswers(Question & q)
+void Viewer::changeRightAnswers(Question & q) //++
 {
 	while (true) {
 		clearScreen();
@@ -903,12 +905,16 @@ void Viewer::changeRightAnswers(Question & q)
 				gotoXY(32, k);
 				cout << i;
 				h++; k++;
+			}			
+			int varNum;			
+			while (true) {				
+				gotoXY(15, k);
+				cout << "Номер варианта, который необходимо пометить правильным:";
+				gotoXY(15, ++k);
+				cin >> varNum;
+				if (varNum <= q.getCntAnswerChoice())
+					break;
 			}
-			int varNum;
-			gotoXY(15, ++k);
-			cout << "Номер варианта, который необходимо пометить правильным:";
-			gotoXY(15, ++k);
-			cin >> varNum;
 			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
 			if (it == end(q.getRightAnswers()))
 				q.addRightAnswers(varNum);
@@ -918,11 +924,65 @@ void Viewer::changeRightAnswers(Question & q)
 			Sleep(1000);
 		}
 		if (ch == 2) {
-			/*auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
-			if (it != end(q.getRightAnswers())) {
+			clearScreen();
+			gotoXY(15, 8); white();
+			int k = 8, h = 1;
+			for (auto&i : q.getAnswerChoice()) {
+				gotoXY(15, k);
+				cout << "Вариант №" << h;
+				gotoXY(32, k);
+				cout << i;
+				h++; k++;
+			}
+			int varNum;
+			while (true) {
+				gotoXY(15, k);
+				cout << "Номер варианта, у которого необходимо убрать отметку:";
+				gotoXY(15, ++k);
+				cin >> varNum;
+				if (varNum <= q.getCntAnswerChoice())
+					break;
+			}
+			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
+			if (it != end(q.getRightAnswers()))
 				q.getRightAnswers().erase(it);
-			}*/
+			clearScreen();
+			gotoXY(15, 8);
+			cout << "Отметка с варианта ответа снята!";
+			Sleep(1000);			
 		}
 	}
+
+}
+
+void Viewer::delQuesFromTest(Test & t) //++
+{
+	clearScreen();
+	gotoXY(15, 5); green();
+	cout << "Удаление вопроса из теста №" << t.getIdTest();
+	gotoXY(15, 8); white();
+	int k = 8;
+	for (auto i = t.getBeginTestQuestions(); i != t.getEndTestQuestions(); i++)
+	{
+		gotoXY(15, k);
+		cout << i->first;
+		gotoXY(32, k);
+		cout << i->second.getQuesText();
+		k++;
+	}
+	int quesNum;
+	while (true) {
+		gotoXY(15, ++k);
+		cout << "Номер вопроса, который надо удалить";
+		gotoXY(15, ++k);
+		cin >> quesNum;
+		if (quesNum <= t.getCntTestQuestions())
+			break;
+	}	
+	t.getTestQuestions().erase(quesNum);
+	clearScreen();
+	gotoXY(15, 8);
+	cout << "Вопрос удален!";
+	Sleep(1000);
 
 }

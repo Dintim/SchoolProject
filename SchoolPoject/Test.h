@@ -31,6 +31,7 @@ public:
 	int getCntTestQuestions()const { return testQuestions.size(); }
 	auto getBeginTestQuestions()const { return begin(testQuestions); }
 	auto getEndTestQuestions()const { return end(testQuestions); }
+	map<int, Question>& getTestQuestions() { return testQuestions; } //++
 	string convertToString();
 	void readFromFile(string fileName);
 	void writeToFile(); //++
