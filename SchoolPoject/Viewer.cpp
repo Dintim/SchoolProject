@@ -702,14 +702,13 @@ void Viewer::studentsPassedTest(int idTest) //++
 
 void Viewer::changeTest(int idTest)
 {
+	Test tmp;
+	tmp.readFromFile("tests\\" + to_string(idTest));
 	while (true) {
 		clearScreen();
 		gotoXY(15, 5); green();
 		cout << "Изменение теста №" << idTest;
-		gotoXY(15, 8); white();
-		Test tmp;
-		tmp.readFromFile("tests\\" + to_string(idTest));
-		//cout << tmp.getIdTest();
+		gotoXY(15, 8); white();		
 		vector<string> v = { "изменить вопрос", "добавить вопрос", "удалить вопрос", "сохранить изменения и выйти" };
 		int ch = choice(v, 15, 9);
 		if (ch == 1) {
@@ -724,11 +723,9 @@ void Viewer::changeTest(int idTest)
 			int ch2 = choice(v2, 15, 8);
 			if (ch2 == 1) {
 				addQuesToTest(tmp);
-				gotoXY(15, 14);
-				cout << "number of questions: " << tmp.getCntTestQuestions();
-				Sleep(1000);
+				tmp.setTestMaxResult(tmp.sumRightAnswers());
 			}
-			if (ch == 2) {
+			if (ch2 == 2) {
 				string str;
 				gotoXY(15, 11); white();
 				cout << "Название файла, где хранится вопрос:";
@@ -740,24 +737,19 @@ void Viewer::changeTest(int idTest)
 				while (!is.eof()) {
 					string s;
 					getline(is, s);
-					if (s.size()!=0)
+					if (s.size() != 0) {
 						tmp.addQuestionFromString(s);
+						tmp.setTestMaxResult(tmp.sumRightAnswers());
+					}
 				}
-				is.close();								
-				gotoXY(15, 14);
-				cout << "number of questions: " << tmp.getCntTestQuestions();
-				Sleep(1000);
 			}
 		}
 		if (ch == 3) {
 
 		}
 		if (ch == 4) {
-			gotoXY(15, 14);
-			cout << "number of questions: " << tmp.getCntTestQuestions();
-			Sleep(1000);
-			tmp.writeToFile();			
 			break;
 		}
 	}
+	tmp.writeToFile();	
 }
