@@ -619,10 +619,18 @@ void Viewer::showMyTests(int id) //++
 		}
 		int k2 = ++k1; int testNum;
 		gotoXY(15, k2);
-		cout << "Выберите номер теста:";
-		gotoXY(40, k2);
-		cin >> testNum;
-		testMenu(testNum);		
+		vector<string> v = { "выбрать номер теста", "выйти" };
+		int s = choice(v, 15, k2);
+		if (s == 2)
+			break;
+		if (s == 1) {
+			int k3 = k2+3;
+			gotoXY(15, k3);
+			cout << "номер теста:";
+			gotoXY(32, k3);
+			cin >> testNum;
+			testMenu(testNum);
+		}
 	}
 }
 
