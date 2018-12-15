@@ -863,9 +863,9 @@ void Viewer::changeVarQuestion(Question & q) //++
 			gotoXY(32, 8);
 			cin >> varNum;
 			gotoXY(15, 10);
-			cout << q.getAnswerChoice()[varNum];
+			cout << q.getAnswerChoice()[varNum-1];
 			Sleep(1000);
-			q.getAnswerChoice().erase(begin(q.getAnswerChoice())+varNum-1);
+			q.getAnswerChoice().erase(begin(q.getAnswerChoice())+(varNum-1));			
 			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
 			if (it != end(q.getRightAnswers())) {
 				q.getRightAnswers().erase(it);
@@ -884,4 +884,45 @@ void Viewer::changeVarQuestion(Question & q) //++
 
 void Viewer::changeRightAnswers(Question & q)
 {
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << "Изменение метки правильных вариантов ответов";
+		gotoXY(15, 8); white();
+		vector<string> v = { "добавить", "удалить", "выйти" };
+		int ch = choice(v, 15, 8);
+		if (ch == 3)
+			break;
+		if (ch == 1) {
+			clearScreen();
+			gotoXY(15, 8); white();
+			int k = 8, h = 1;
+			for (auto&i : q.getAnswerChoice()) {
+				gotoXY(15, k);
+				cout << "Вариант №" << h;
+				gotoXY(32, k);
+				cout << i;
+				h++; k++;
+			}
+			int varNum;
+			gotoXY(15, ++k);
+			cout << "Номер варианта, который необходимо пометить правильным:";
+			gotoXY(15, ++k);
+			cin >> varNum;
+			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
+			if (it == end(q.getRightAnswers()))
+				q.addRightAnswers(varNum);
+			clearScreen();
+			gotoXY(15, 8);
+			cout << "Вариант ответа помечен правильным!";
+			Sleep(1000);
+		}
+		if (ch == 2) {
+			/*auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
+			if (it != end(q.getRightAnswers())) {
+				q.getRightAnswers().erase(it);
+			}*/
+		}
+	}
+
 }
