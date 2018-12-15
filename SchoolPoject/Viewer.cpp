@@ -579,7 +579,7 @@ void Viewer::addQuesToTest(Test& t) //++
 	t.addQuestion(q);	
 }
 
-void Viewer::addAnswers(Question & q, int quesNum) //++
+void Viewer::addAnswers(Question & q, int varNum) //++
 {	
 	string answer;
 	clearScreen();
@@ -594,7 +594,7 @@ void Viewer::addAnswers(Question & q, int quesNum) //++
 	vector<string> vs = { "да","нет" };
 	int ss = choice(vs, 15, 10);
 	if (ss == 1)
-		q.addRightAnswers(quesNum);
+		q.addRightAnswers(varNum);
 	q.addAnswerChoice(answer);
 }
 
@@ -712,7 +712,23 @@ void Viewer::changeTest(int idTest)
 		vector<string> v = { "изменить вопрос", "добавить вопрос", "удалить вопрос", "сохранить изменения и выйти" };
 		int ch = choice(v, 15, 9);
 		if (ch == 1) {
-
+			int quesNum;
+			clearScreen();
+			int k = 8;
+			for (auto i = tmp.getBeginTestQuestions(); i != tmp.getEndTestQuestions(); i++)
+			{
+				gotoXY(15, k);
+				cout << "Вопрос №" << i->first;
+				gotoXY(32, k);
+				cout << i->second.getQuesText();
+				k++;
+			}
+			int k2 = ++k;
+			gotoXY(15, k2); yellow();
+			cout << "Номер изменяемого вопроса:";
+			gotoXY(45, k2);
+			cin >> quesNum;
+			changeQuestion(tmp, quesNum);
 		}
 		if (ch == 2) {
 			clearScreen();
@@ -723,7 +739,7 @@ void Viewer::changeTest(int idTest)
 			int ch2 = choice(v2, 15, 8);
 			if (ch2 == 1) {
 				addQuesToTest(tmp);
-				tmp.setTestMaxResult(tmp.sumRightAnswers());
+				tmp.setTestMaxResult(tmp.sumRightAnswers());				
 			}
 			if (ch2 == 2) {
 				string str;
@@ -743,6 +759,10 @@ void Viewer::changeTest(int idTest)
 					}
 				}
 			}
+			clearScreen();
+			gotoXY(15, 8); yellow();
+			cout << "Вопрос добавлен!";
+			Sleep(1000);
 		}
 		if (ch == 3) {
 
@@ -751,5 +771,117 @@ void Viewer::changeTest(int idTest)
 			break;
 		}
 	}
+	tmp.setTestMaxResult(tmp.sumRightAnswers());
 	tmp.writeToFile();	
+}
+
+void Viewer::changeQuestion(Test& t, int quesNum)
+{
+	Question q = t[quesNum];
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << "Изменение вопроса №" << quesNum;
+		gotoXY(15, 8); white();
+		vector<string> v = { "формулировка вопроса", "варианты ответов", "правильные ответы", "выйти" };
+		int ch = choice(v, 15, 8);
+		if (ch == 4)
+			break;
+		if (ch == 1) {
+			string str;
+			clearScreen();
+			gotoXY(15, 5); green();
+			cout << q.getQuesText();
+			gotoXY(15, 8); white();
+			cout << "Новая формулировка:";
+			gotoXY(15, 9);
+			if (cin.peek() == '\n')
+				cin.get();
+			getline(cin, str);
+			q.setQuesText(str);
+			clearScreen();
+			gotoXY(15, 8);
+			cout << "Текст вопроса изменен!";
+			Sleep(1000);
+		}
+		if (ch == 2) {
+			changeVarQuestion(q);
+		}
+		if (ch == 3) {
+			changeRightAnswers(q);
+		}
+	}
+	t.setTestMaxResult(t.sumRightAnswers());
+	t[quesNum] = q;
+}
+
+void Viewer::changeVarQuestion(Question & q) //++
+{
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << "Изменение вариантов ответов";
+		gotoXY(15, 8); white();
+		vector<string> v = { "изменить текст варианта", "добавить новый вариант", "удалить вариант", "выйти" };
+		int ch = choice(v, 15, 8);
+		if (ch == 4)
+			break;
+		if (ch == 1) {
+			int varNum; string str;
+			clearScreen();
+			gotoXY(15, 8); white();
+			cout << "Номер варианта:";
+			gotoXY(32, 8);
+			cin >> varNum;
+			gotoXY(15, 10);
+			cout << q.getAnswerChoice()[varNum];
+			gotoXY(15, 12); 
+			cout << "Новая формулировка:";
+			gotoXY(15, 13);
+			if (cin.peek() == '\n')
+				cin.get();
+			getline(cin, str);
+			q.getAnswerChoice()[varNum] = str;
+			clearScreen();
+			gotoXY(15, 8);
+			cout << "Текст варианта ответа изменен!";
+			Sleep(1000);			
+		}
+		if (ch == 2) {
+			int x = q.getCntAnswerChoice();
+			addAnswers(q, ++x);
+			clearScreen();
+			gotoXY(15, 8);
+			cout << "Вариант ответа добавлен!";
+			Sleep(1000);
+		}
+		if (ch == 3) {			
+			int varNum; string str;
+			clearScreen();
+			gotoXY(15, 8); white();
+			cout << "Номер варианта:";
+			gotoXY(32, 8);
+			cin >> varNum;
+			gotoXY(15, 10);
+			cout << q.getAnswerChoice()[varNum];
+			Sleep(1000);
+			q.getAnswerChoice().erase(begin(q.getAnswerChoice())+varNum-1);
+			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
+			if (it != end(q.getRightAnswers())) {
+				q.getRightAnswers().erase(it);
+			}
+			for_each(begin(q.getRightAnswers()), end(q.getRightAnswers()), [&varNum](int&i) {
+				if (i > varNum)
+					i--;
+			});
+			clearScreen();
+			gotoXY(15, 8);
+			cout << "Вариант ответа удален!";
+			Sleep(1000);
+		}
+	}
+}
+
+void Viewer::changeRightAnswers(Question & q)
+{
 }

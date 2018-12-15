@@ -27,11 +27,14 @@ public:
 
 	void addTest(int id); //++
 	void addQuesToTest(Test& t); //++
-	void addAnswers(Question& q, int quesNum); //++
+	void addAnswers(Question& q, int varNum); //++
 
 	void showMyTests(int id); //++
 	void testMenu(int idTest); //++
 	void studentsPassedTest(int idTest); //++
 	void changeTest(int idTest); //++
+	void changeQuestion(Test &t, int quesNum); //++
+	void changeVarQuestion(Question& q); //++
+	void changeRightAnswers(Question& q); //++
 };
 

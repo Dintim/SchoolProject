@@ -21,11 +21,14 @@ public:
 	void addRightAnswers(int var);	
 	
 	string getQuesText()const { return this->quesText; }	
-	const vector<string>& getAnswerChoice()const { return this->answerChoice; }
+	vector<string>& getAnswerChoice() { return this->answerChoice; } //++
 	string getAnswer(int index)const { return answerChoice[index]; }
-	const vector<int>& getRightAnswers()const { return this->rightAnswers; }
+	vector<int>& getRightAnswers() { return this->rightAnswers; } //++	
 	int getCntAnswerChoice()const { return answerChoice.size(); }
 	int getCntRightAnswers()const { return rightAnswers.size(); }
+	auto getBeginAnswerChoice() { return begin(answerChoice); } //++
+	auto getEndAnswerChoice() { return end(answerChoice); } //++
+
 
 	string convertToString();
 	void readFromString(string& str);
