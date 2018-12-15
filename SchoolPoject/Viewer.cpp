@@ -485,7 +485,8 @@ void Viewer::addTest(int id) //++
 	string nameTest;
 	cout << "Тема теста:";
 	gotoXY(32, 8);
-	cin.get();
+	if (cin.peek()=='\n')
+		cin.get();
 	getline(cin, nameTest);
 	Test t(nameTest);
 	t.setIdCreator(id);		
@@ -540,7 +541,8 @@ void Viewer::addQuesToTest(Test& t) //++
 	string quesText;		
 	cout << "Напишите вопрос:";
 	gotoXY(32, 8);
-	cin.get();
+	if (cin.peek() == '\n')
+		cin.get();
 	getline(cin, quesText);
 	Question q(quesText);	
 	int k = 1;	
@@ -584,7 +586,8 @@ void Viewer::addAnswers(Question & q, int quesNum) //++
 	gotoXY(15, 8); white();
 	cout << "Вариант ответа:";
 	gotoXY(32, 8);
-	cin.get();
+	if (cin.peek() == '\n')
+		cin.get();
 	getline(cin, answer);
 	gotoXY(15, 9);
 	cout << "Является ли этот вариант ответа правильным?";
@@ -595,8 +598,54 @@ void Viewer::addAnswers(Question & q, int quesNum) //++
 	q.addAnswerChoice(answer);
 }
 
-void Viewer::showMyTests(int id)
+void Viewer::showMyTests(int id) //++
 {
-	sch.readListTestsFromFile();
+	if (sch.getCntListTests() == 0)
+		sch.readListTestsFromFile();
+	clearScreen();	
+	gotoXY(15, 5); green();
+	cout << "Список ваших тестов";
+	gotoXY(15, 8); white();
+	int k1 = 8;
+	for (auto&i : sch.vectorListTests()) {
+		if (i.getIdCreator() == id) {
+			gotoXY(15, k1);
+			cout << "Тест №" << i.getIdTest();
+			gotoXY(32, k1);
+			cout << i.getTestName();
+			k1++;
+		}				
+	}
+	int k2 = ++k1; int testNum;
+	gotoXY(15, k2);
+	cout << "Выберите номер теста";
+	gotoXY(40, k2);
+	cin >> testNum;
+	
+	clearScreen();
+	gotoXY(15, 8); white();
+	auto it = find_if(sch.getBeginVectorListTests(), sch.getEndVectorListTests(), [&testNum](ListTests&i) {
+		return i.getIdTest() == testNum;
+	});
+	cout << it->getIdTest();
+	gotoXY(32, 8);
+	cout << it->getTestName();
+	gotoXY(15, 10);
+	vector<string> v = { "Список студентов, прошедших тест", "Изменить тест", "Выйти" };
+	int ch = choice(v, 15, 11);
+	if (ch == 3)
+		return;
+	if (ch == 1) {
+		studentsPassedTest(testNum);
+	}
+	if (ch == 2) {
+
+	}
+
+}
+
+void Viewer::studentsPassedTest(int idTest) //++
+{
+	clearScreen();
 
 }

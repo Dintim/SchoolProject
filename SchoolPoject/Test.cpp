@@ -70,7 +70,7 @@ string Test::convertToString() //++
 	return res;
 }
 
-void Test::readFromFile(string fileName) //++
+void Test::readFromFile(string fileName) 
 {
 	ifstream is(fileName);
 	vector<string> v;
@@ -92,7 +92,7 @@ void Test::readFromFile(string fileName) //++
 	is.close();
 }
 
-void Test::writeToFile() //++
+void Test::writeToFile() 
 {
 	string name = "tests\\" + to_string(idTest);
 	ofstream os(name);
@@ -101,7 +101,7 @@ void Test::writeToFile() //++
 	os.close();
 }
 
-int Test::sumRightAnswers() const //++
+int Test::sumRightAnswers() const 
 {
 	int sum = 0;
 	for (auto&i : testQuestions) {
