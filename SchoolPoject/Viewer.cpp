@@ -506,10 +506,15 @@ void Viewer::addTest(int id) //++
 			break;
 		if (s == 1) 		
 			addQuesToTest(t);	
-	}
+	}	
+	if (sch.getCntListTests() == 0) 
+	{
+		sch.readListTestsFromFile();
+	}	
 	int x = sch.getCntListTests();
 	t.setIdTest(++x);
 	t.setTestMaxResult(t.sumRightAnswers());
+
 	clearScreen();
 	gotoXY(15, 5); green();
 	cout << "Тест создан!";
@@ -519,7 +524,6 @@ void Viewer::addTest(int id) //++
 	int s = choice(v, 15, 9);
 	if (s == 1) 
 	{		
-		//string name = "tests\\" + to_string(t.getIdTest());
 		t.writeToFile();
 	}	
 	ListTests lt(t.getIdTest(), t.getTestName(), t.getIdCreator());
@@ -559,8 +563,8 @@ void Viewer::addQuesToTest(Test& t) //++
 			{
 				clearScreen();
 				gotoXY(15, 8);
-				cout << "Вы не отметили ни одного правильного ответа. Введите заново";
-				k = 1;
+				cout << "Вы не отметили ни одного правильного ответа. Введите заново";				
+				k++;
 				Sleep(1000);
 				continue;
 			}
