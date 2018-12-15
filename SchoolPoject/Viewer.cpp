@@ -709,17 +709,45 @@ void Viewer::changeTest(int idTest)
 		gotoXY(15, 8); white();
 		Test tmp;
 		tmp.readFromFile("tests\\" + to_string(idTest));
-		cout << tmp.getIdTest();
+		//cout << tmp.getIdTest();
 		vector<string> v = { "изменить вопрос", "добавить вопрос", "удалить вопрос", "сохранить изменени€ и выйти" };
 		int ch = choice(v, 15, 9);
 		if (ch == 1) {
 
 		}
 		if (ch == 2) {
-			addQuesToTest(tmp);
-			gotoXY(15, 14);
-			cout << "number of questions: " << tmp.getCntTestQuestions();
-			Sleep(1000);
+			clearScreen();
+			gotoXY(15, 5); green();
+			cout << "ƒобавление вопроса к тесту є" << idTest;
+			gotoXY(15, 8); white();
+			vector<string> v2 = { "добавить вручную", "добавить из файла" };
+			int ch2 = choice(v2, 15, 8);
+			if (ch2 == 1) {
+				addQuesToTest(tmp);
+				gotoXY(15, 14);
+				cout << "number of questions: " << tmp.getCntTestQuestions();
+				Sleep(1000);
+			}
+			if (ch == 2) {
+				string str;
+				gotoXY(15, 11); white();
+				cout << "Ќазвание файла, где хранитс€ вопрос:";
+				gotoXY(15, 12);
+				if (cin.peek() == '\n')
+					cin.get();
+				getline(cin, str);
+				ifstream is(str);
+				while (!is.eof()) {
+					string s;
+					getline(is, s);
+					if (s.size()!=0)
+						tmp.addQuestionFromString(s);
+				}
+				is.close();								
+				gotoXY(15, 14);
+				cout << "number of questions: " << tmp.getCntTestQuestions();
+				Sleep(1000);
+			}
 		}
 		if (ch == 3) {
 
