@@ -13,6 +13,11 @@ public:
 	void setIdStudent(int idStudent);
 	void setIdTest(int idTest);
 	void setTestResult(int res);
+
+	int getIdStudent()const { return idStudent; } //++
+	int getIdTest()const { return idTest; } //++
+	int getTestResult()const { return testResult; } //++
+
 	void readFromString(string& str); 
 	string convertToString(); 
 };

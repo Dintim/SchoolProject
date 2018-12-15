@@ -95,7 +95,7 @@ void Test::readFromFile(string fileName)
 void Test::writeToFile() 
 {
 	string name = "tests\\" + to_string(idTest);
-	ofstream os(name);
+	ofstream os(name);	
 	string str = convertToString();
 	os << str;
 	os.close();

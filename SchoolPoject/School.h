@@ -52,6 +52,10 @@ public:
 	const vector<ListTests>& vectorListTests()const { return listTests; } //++
 	auto getBeginVectorListTests() { return begin(listTests); } //++
 	auto getEndVectorListTests() { return end(listTests); } //++
+	auto getBeginTesters() { return begin(testers); } //++
+	auto getEndTesters() { return end(testers); } //++
+	auto getBeginStudents() { return begin(students); } //++
+	auto getEndStudents() { return end(students); } //++
 };
 
 

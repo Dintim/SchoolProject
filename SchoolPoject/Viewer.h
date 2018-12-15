@@ -30,6 +30,8 @@ public:
 	void addAnswers(Question& q, int quesNum); //++
 
 	void showMyTests(int id); //++
+	void testMenu(int idTest); //++
 	void studentsPassedTest(int idTest); //++
+	void changeTest(int idTest); //++
 };
 

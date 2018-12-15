@@ -602,50 +602,126 @@ void Viewer::showMyTests(int id) //++
 {
 	if (sch.getCntListTests() == 0)
 		sch.readListTestsFromFile();
-	clearScreen();	
-	gotoXY(15, 5); green();
-	cout << "Список ваших тестов";
-	gotoXY(15, 8); white();
-	int k1 = 8;
-	for (auto&i : sch.vectorListTests()) {
-		if (i.getIdCreator() == id) {
-			gotoXY(15, k1);
-			cout << "Тест №" << i.getIdTest();
-			gotoXY(32, k1);
-			cout << i.getTestName();
-			k1++;
-		}				
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << "Список ваших тестов";
+		gotoXY(15, 8); white();
+		int k1 = 8;
+		for (auto&i : sch.vectorListTests()) {
+			if (i.getIdCreator() == id) {
+				gotoXY(15, k1);
+				cout << "Тест №" << i.getIdTest();
+				gotoXY(32, k1);
+				cout << i.getTestName();
+				k1++;
+			}
+		}
+		int k2 = ++k1; int testNum;
+		gotoXY(15, k2);
+		cout << "Выберите номер теста:";
+		gotoXY(40, k2);
+		cin >> testNum;
+		testMenu(testNum);		
 	}
-	int k2 = ++k1; int testNum;
-	gotoXY(15, k2);
-	cout << "Выберите номер теста";
-	gotoXY(40, k2);
-	cin >> testNum;
-	
-	clearScreen();
-	gotoXY(15, 8); white();
-	auto it = find_if(sch.getBeginVectorListTests(), sch.getEndVectorListTests(), [&testNum](ListTests&i) {
-		return i.getIdTest() == testNum;
-	});
-	cout << it->getIdTest();
-	gotoXY(32, 8);
-	cout << it->getTestName();
-	gotoXY(15, 10);
-	vector<string> v = { "Список студентов, прошедших тест", "Изменить тест", "Выйти" };
-	int ch = choice(v, 15, 11);
-	if (ch == 3)
-		return;
-	if (ch == 1) {
-		studentsPassedTest(testNum);
-	}
-	if (ch == 2) {
+}
 
+void Viewer::testMenu(int idTest)
+{
+	while (true) {
+		clearScreen();
+		gotoXY(18, 8); white();
+		auto it = find_if(sch.getBeginVectorListTests(), sch.getEndVectorListTests(), [&idTest](ListTests&i) {
+			return i.getIdTest() == idTest;
+		});
+		cout << it->getIdTest();
+		gotoXY(32, 8);
+		cout << it->getTestName();
+		gotoXY(15, 10);
+		vector<string> v = { "Список студентов, прошедших тест", "Изменить тест", "Выйти" };
+		int ch = choice(v, 15, 11);
+		if (ch == 3)
+			break;
+		if (ch == 1) {
+			studentsPassedTest(idTest);
+		}
+		if (ch == 2) {
+			changeTest(idTest);
+		}
 	}
-
 }
 
 void Viewer::studentsPassedTest(int idTest) //++
 {
+	if (sch.getCntTesters() == 0)
+		sch.readTestersFromFile();
+	if (sch.getCntStudents() == 0)
+		sch.readStudentsFromFile();
 	clearScreen();
+	gotoXY(15, 5); green();
+	cout << "Список студентов, прошедших тест №" << idTest;
+	gotoXY(15, 8); white();
+	cout << "ID студента";
+	gotoXY(32, 8);
+	cout << "Фамилия студента";
+	gotoXY(55, 8);
+	cout << "Баллы за тест";
+	gotoXY(15, 9); 
+	int k = 9;
+	for_each(sch.getBeginTesters(), sch.getEndTesters(), [&idTest, &k, this](Tester&i) {
+		if (i.getIdTest() == idTest) {
+			gotoXY(15, k);
+			cout << i.getIdStudent();
+			gotoXY(32, k);
+			auto it = find_if(sch.getBeginStudents(), sch.getEndStudents(), [&i](Student&j) {
+				return j.getIdStudent() == i.getIdStudent();
+			});
+			cout << it->getSurname();
+			gotoXY(55, k);
+			cout << i.getTestResult();
+			k++;
+		}
+	});
+	gotoXY(15, ++k);
+	cout << "Вернуться в меню теста?";	
+	int x = ++k;
+	gotoXY(15, x);	
+	vector<string> v = { "да" };
+	int ch = choice(v, 15, x);
+	if (ch == 1)
+		return;	
+}
 
+void Viewer::changeTest(int idTest)
+{
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << "Изменение теста №" << idTest;
+		gotoXY(15, 8); white();
+		Test tmp;
+		tmp.readFromFile("tests\\" + to_string(idTest));
+		cout << tmp.getIdTest();
+		vector<string> v = { "изменить вопрос", "добавить вопрос", "удалить вопрос", "сохранить изменения и выйти" };
+		int ch = choice(v, 15, 9);
+		if (ch == 1) {
+
+		}
+		if (ch == 2) {
+			addQuesToTest(tmp);
+			gotoXY(15, 14);
+			cout << "number of questions: " << tmp.getCntTestQuestions();
+			Sleep(1000);
+		}
+		if (ch == 3) {
+
+		}
+		if (ch == 4) {
+			gotoXY(15, 14);
+			cout << "number of questions: " << tmp.getCntTestQuestions();
+			Sleep(1000);
+			tmp.writeToFile();			
+			break;
+		}
+	}
 }
