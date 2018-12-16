@@ -706,23 +706,17 @@ void Viewer::changeTest(int idTest) //++
 		int ch = choice(v, 15, 9);
 		if (ch == 1) {
 			int quesNum;
-			clearScreen();
-			int k = 8;
-			
+			clearScreen();			
+			vector<string> vec;
 			for (auto i = tmp.getBeginTestQuestions(); i != tmp.getEndTestQuestions(); i++)
-			{
-				gotoXY(15, k);
-				cout << "Вопрос №" << i->first;
-				gotoXY(32, k);
-				cout << i->second.getQuesText();
-				k++;
+			{				
+				vec.push_back(i->second.getQuesText());				
 			}
-			int k2 = ++k;
-			gotoXY(15, k2); yellow();
-			cout << "Номер изменяемого вопроса:";
-			gotoXY(45, k2);
-			cin >> quesNum;
-			changeQuestion(tmp, quesNum);
+			vec.push_back("Выйти");
+			int s = choice(vec, 15, 8);
+			if (s == vec.size())
+				break;			
+			changeQuestion(tmp, s);
 		}
 		if (ch == 2) {
 			clearScreen();
@@ -824,18 +818,22 @@ void Viewer::changeVarQuestion(Question & q) //++
 			int varNum; string str;
 			clearScreen();
 			gotoXY(15, 8); white();
-			cout << "Номер варианта:";
-			gotoXY(32, 8);
-			cin >> varNum;
-			gotoXY(15, 10);
-			cout << q.getAnswerChoice()[varNum];
-			gotoXY(15, 12); 
+			vector<string> vec;
+			for (auto&i : q.getAnswerChoice()) {
+				vec.push_back(i);
+			}
+			vec.push_back("Выйти");
+			int s = choice(vec, 15, 8);
+			if (s == vec.size())
+				break;
+			int k = 8 + vec.size();
+			gotoXY(15, ++k); 
 			cout << "Новая формулировка:";
-			gotoXY(15, 13);
+			gotoXY(15, ++k);
 			if (cin.peek() == '\n')
 				cin.get();
 			getline(cin, str);
-			q.getAnswerChoice()[varNum] = str;
+			q.getAnswerChoice()[s-1] = str;
 			clearScreen();
 			gotoXY(15, 8);
 			cout << "Текст варианта ответа изменен!";
@@ -852,22 +850,24 @@ void Viewer::changeVarQuestion(Question & q) //++
 		if (ch == 3) {			
 			int varNum; string str;
 			clearScreen();
-			gotoXY(15, 8); white();
-			cout << "Номер варианта:";
-			gotoXY(32, 8);
-			cin >> varNum;
-			gotoXY(15, 10);
-			cout << q.getAnswerChoice()[varNum-1];
-			Sleep(1000);
-			q.getAnswerChoice().erase(begin(q.getAnswerChoice())+(varNum-1));			
-			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
+			gotoXY(15, 8); white();			
+			vector<string> vec;
+			for (auto&i : q.getAnswerChoice()) {
+				vec.push_back(i);
+			}
+			vec.push_back("Выйти");
+			int s = choice(vec, 15, 8);
+			if (s == vec.size())
+				break;
+			q.getAnswerChoice().erase(begin(q.getAnswerChoice()) + (s - 1));
+			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), s);
 			if (it != end(q.getRightAnswers())) {
 				q.getRightAnswers().erase(it);
 			}
-			for_each(begin(q.getRightAnswers()), end(q.getRightAnswers()), [&varNum](int&i) {
-				if (i > varNum)
+			for_each(begin(q.getRightAnswers()), end(q.getRightAnswers()), [&s](int&i) {
+				if (i > s)
 					i--;
-			});
+			});			
 			clearScreen();
 			gotoXY(15, 8);
 			cout << "Вариант ответа удален!";
@@ -889,27 +889,18 @@ void Viewer::changeRightAnswers(Question & q) //++
 			break;
 		if (ch == 1) {
 			clearScreen();
-			gotoXY(15, 8); white();
-			int k = 8, h = 1;
-			for (auto&i : q.getAnswerChoice()) {
-				gotoXY(15, k);
-				cout << "Вариант №" << h;
-				gotoXY(32, k);
-				cout << i;
-				h++; k++;
-			}			
-			int varNum;			
-			while (true) {				
-				gotoXY(15, k);
-				cout << "Номер варианта, который необходимо пометить правильным:";
-				gotoXY(15, ++k);
-				cin >> varNum;
-				if (varNum <= q.getCntAnswerChoice())
-					break;
+			gotoXY(15, 8); white();			
+			vector<string> vec;
+			for (auto&i : q.getAnswerChoice()) {				
+				vec.push_back(i);				
 			}
-			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
+			vec.push_back("Выйти");
+			int s = choice(vec, 15, 8);
+			if (s == vec.size())
+				break;
+			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), s);
 			if (it == end(q.getRightAnswers()))
-				q.addRightAnswers(varNum);
+				q.addRightAnswers(s);			
 			clearScreen();
 			gotoXY(15, 8);
 			cout << "Вариант ответа помечен правильным!";
@@ -917,27 +908,18 @@ void Viewer::changeRightAnswers(Question & q) //++
 		}
 		if (ch == 2) {
 			clearScreen();
-			gotoXY(15, 8); white();
-			int k = 8, h = 1;
-			for (auto&i : q.getAnswerChoice()) {
-				gotoXY(15, k);
-				cout << "Вариант №" << h;
-				gotoXY(32, k);
-				cout << i;
-				h++; k++;
+			gotoXY(15, 8); white();			
+			vector<string> vec;
+			for (auto&i : q.getAnswerChoice()) {				
+				vec.push_back(i);				
 			}
-			int varNum;
-			while (true) {
-				gotoXY(15, k);
-				cout << "Номер варианта, у которого необходимо убрать отметку:";
-				gotoXY(15, ++k);
-				cin >> varNum;
-				if (varNum <= q.getCntAnswerChoice())
-					break;
-			}
-			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), varNum);
+			vec.push_back("Выйти");
+			int s = choice(vec, 15, 8);
+			if (s == vec.size())
+				break;
+			auto it = find(begin(q.getRightAnswers()), end(q.getRightAnswers()), s);
 			if (it != end(q.getRightAnswers()))
-				q.getRightAnswers().erase(it);
+				q.getRightAnswers().erase(it);			
 			clearScreen();
 			gotoXY(15, 8);
 			cout << "Отметка с варианта ответа снята!";
