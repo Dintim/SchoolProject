@@ -21,9 +21,15 @@ public:
 	string pasEntry();
 	int intEntry(int c, bool e);
 	int choice(vector<string> ch, int x, int y);
+	
 	void menuA();
+	void addTeacherMenu(); //++
+	void addStudentMenu(); //++
+	void showTeachers(); //++
+	void teacherMenu(int id); //++
+
 	void menuT(int id);
-	void menuS(int id);
+	void menuS(int id);	
 
 	void addTest(int id); //++
 	void addQuesToTest(Test& t); //++
@@ -37,5 +43,6 @@ public:
 	void changeVarQuestion(Question& q); //++
 	void changeRightAnswers(Question& q); //++
 	void delQuesFromTest(Test& t); //++
+
 };
 

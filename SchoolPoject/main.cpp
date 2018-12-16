@@ -14,7 +14,8 @@ int main()
 	setlocale(LC_ALL, "Rus");
 
 	Viewer v;
-	v.menuT(1);	
+	//v.menuT(1);
+	v.menuA();
 
 	
 

@@ -421,6 +421,231 @@ void Viewer::menuA()
 {
 	clearScreen();
 	cout << "Admin";
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5);
+		green();
+		cout << "Добро пожаловать в консоль администратора ITStep!";
+		gotoXY(15, 8);
+		vector<string> vec = { "Список преподавателей", "Список студентов", "Добавить преподавателя", "Добавить студента", "Выйти" };		
+		int ch = choice(vec, 15, 8);
+		if (ch == 5)
+		{
+			LogIn();
+		}
+		else if (ch == 1)
+		{
+			showTeachers();
+		}
+		else if (ch == 2)
+		{
+
+		}
+		else if (ch == 3)
+		{
+			addTeacherMenu();
+		}
+		else if (ch == 4)
+		{
+			addStudentMenu();
+		}
+
+	}
+
+}
+
+void Viewer::addTeacherMenu()
+{
+	if (sch.getCntTeachers() == 0)
+		sch.readTeachersFromFile();
+	clearScreen();
+	gotoXY(15, 5); green();
+	cout << "Добавление нового преподавателя!";
+	Teacher t;
+	string firstName, surname, password; bool sex; 
+	
+	gotoXY(15, 8); white();
+	cout << "Имя:";
+	gotoXY(32, 8);
+	if (cin.peek() == '\n')
+		cin.get();
+	getline(cin, firstName);
+	t.setFirstName(firstName);
+	
+	gotoXY(15, 9); 
+	cout << "Фамилия:";
+	gotoXY(32, 9);
+	if (cin.peek() == '\n')
+		cin.get();
+	getline(cin, surname);
+	t.setSurname(surname);
+	
+	gotoXY(15, 10); 
+	cout << "Пол:";
+	vector<string> v = { "Женский", "Мужской" };
+	int s = choice(v, 15, 11);
+	sex = s - 1;
+	t.setSex(sex);
+
+	gotoXY(15, 13); white();
+	cout << "Дата рождения:";
+	gotoXY(15, 14); 
+	int d, m, y;
+	cout << "Год: ";
+	gotoXY(32, 14);	
+	cin >> y;
+	gotoXY(15, 15); 
+	cout << "Месяц (цифрами): ";
+	gotoXY(32, 15);
+	cin >> m;	
+	gotoXY(15, 16);
+	cout << "День: ";
+	gotoXY(32, 16);
+	cin >> d;
+	t.setBirthDay(date_(d, m, y));
+
+	gotoXY(15, 17);
+	cout << "Пароль:";
+	gotoXY(32, 17);
+	if (cin.peek() == '\n')
+		cin.get();
+	getline(cin, password);
+	t.setPassword(password);
+	t.setStatus("работает");
+	sch.addTeacher(t);
+	sch.writeTeachersToFile();
+	clearScreen();
+	gotoXY(15, 8); white();
+	cout << "Преподаватель " << t.getFirstName() << " " << t.getSurname() << " добавлен!";
+	Sleep(1000);
+}
+
+void Viewer::addStudentMenu()
+{
+	if (sch.getCntStudents() == 0)
+		sch.readStudentsFromFile();
+	clearScreen();
+	gotoXY(15, 5); green();
+	cout << "Добавление нового студента!";	
+	Student st;
+	string firstName, surname, password; bool sex;
+
+	gotoXY(15, 8); white();
+	cout << "Имя:";
+	gotoXY(32, 8);
+	if (cin.peek() == '\n')
+		cin.get();
+	getline(cin, firstName);
+	st.setFirstName(firstName);
+
+	gotoXY(15, 9);
+	cout << "Фамилия:";
+	gotoXY(32, 9);
+	if (cin.peek() == '\n')
+		cin.get();
+	getline(cin, surname);
+	st.setSurname(surname);
+
+	gotoXY(15, 10);
+	cout << "Пол:";
+	vector<string> v = { "Женский", "Мужской" };
+	int s = choice(v, 15, 11);
+	sex = s - 1;
+	st.setSex(sex);
+
+	gotoXY(15, 13); white();
+	cout << "Дата рождения:";
+	gotoXY(15, 14);
+	int d, m, y;
+	cout << "Год: ";
+	gotoXY(32, 14);
+	cin >> y;
+	gotoXY(15, 15);
+	cout << "Месяц (цифрами): ";
+	gotoXY(32, 15);
+	cin >> m;
+	gotoXY(15, 16);
+	cout << "День: ";
+	gotoXY(32, 16);
+	cin >> d;
+	st.setBirthDay(date_(d, m, y));
+
+	gotoXY(15, 17);
+	cout << "Пароль:";
+	gotoXY(32, 17);
+	if (cin.peek() == '\n')
+		cin.get();
+	getline(cin, password);
+	st.setPassword(password);
+	st.setStatus("абитуриент");	
+	
+	sch.addStudent(st);
+	sch.writeStudentsToFile();
+	clearScreen();
+	gotoXY(15, 8); white();
+	cout << "Студент " << st.getFirstName() << " " << st.getSurname() << " добавлен!";
+	Sleep(1000);
+}
+
+void Viewer::showTeachers()
+{
+	if (sch.getCntTeachers() == 0)
+		sch.readTeachersFromFile();
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << "Список преподавателей ITStep!";
+		gotoXY(15, 8); white();
+		vector<string> vec;
+		for (auto&i : sch.getTeachersList()) {
+			string tmp = i.getFirstName() + " " + i.getSurname();
+			vec.push_back(tmp);
+		}
+		vec.push_back("Выйти");
+		int s = choice(vec, 15, 8);
+		if (s == vec.size())
+			break;
+		teacherMenu(s);
+	}
+}
+
+void Viewer::teacherMenu(int id)
+{
+	if (sch.getCntListTests() == 0)
+		sch.readListTestsFromFile();
+	if (sch.getCntTesters() == 0)
+		sch.readTestersFromFile();
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << "Преподаватель " << sch.getTeacher(id).getFirstName() << " " << sch.getTeacher(id).getSurname();
+		gotoXY(15, 8); white();
+		vector<string> vec = { "Список тестов","Изменить","Выйти" };
+		int ch = choice(vec, 15, 8);
+		if (ch == 3)
+			break;
+		if (ch == 1) {
+			clearScreen();
+			gotoXY(15, 8); white();
+			vector<string> vec2;
+			vector<int> idTests;
+			for (auto&i : sch.vectorListTests()) {
+				if (i.getIdCreator() == id) {
+					vec2.push_back(i.getTestName());
+					idTests.push_back(i.getIdTest());
+				}
+			}
+			vec2.push_back("Выйти");
+			int ch2 = choice(vec2, 15, 8);
+			if (ch2 == vec2.size())
+				break;			
+			testMenu(idTests[ch2-1]);
+		}
+		if (ch == 2) {
+
+		}
+		Sleep(1000);
+	}
 }
 
 void Viewer::menuT(int id) //++
