@@ -931,32 +931,25 @@ void Viewer::changeRightAnswers(Question & q) //++
 
 void Viewer::delQuesFromTest(Test & t) //++
 {
-	clearScreen();
-	gotoXY(15, 5); green();
-	cout << "Удаление вопроса из теста №" << t.getIdTest();
-	gotoXY(15, 8); white();
-	int k = 8;
-	for (auto i = t.getBeginTestQuestions(); i != t.getEndTestQuestions(); i++)
-	{
-		gotoXY(15, k);
-		cout << i->first;
-		gotoXY(32, k);
-		cout << i->second.getQuesText();
-		k++;
-	}
-	int quesNum;
 	while (true) {
-		gotoXY(15, ++k);
-		cout << "Номер вопроса, который надо удалить";
-		gotoXY(15, ++k);
-		cin >> quesNum;
-		if (quesNum <= t.getCntTestQuestions())
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << "Удаление вопроса из теста №" << t.getIdTest();
+		gotoXY(15, 8); white();		
+		vector<string> vec;
+		for (auto i = t.getBeginTestQuestions(); i != t.getEndTestQuestions(); i++)
+		{			
+			vec.push_back(i->second.getQuesText());			
+		}
+		vec.push_back("Выйти");
+		int s = choice(vec, 15, 8);
+		if (s == vec.size())
 			break;
-	}	
-	t.getTestQuestions().erase(quesNum);
-	clearScreen();
-	gotoXY(15, 8);
-	cout << "Вопрос удален!";
-	Sleep(1000);
+		t.getTestQuestions().erase(s);
+		clearScreen();
+		gotoXY(15, 8);
+		cout << "Вопрос удален!";
+		Sleep(1000);		
+	}
 
 }
