@@ -59,7 +59,7 @@ void School::addListTests(ListTests & lt)
 	listTests.push_back(lt);
 }
 
-const Student & School::getStudent(int idStudent) const
+Student & School::getStudent(int idStudent) //++
 {
 	for (size_t i = 0; i < students.size(); i++)
 	{
@@ -81,7 +81,7 @@ const Student & School::getStudent(string surname) const
 	return st;
 }
 
-const Teacher & School::getTeacher(int idTeacher) const
+Teacher & School::getTeacher(int idTeacher)  //++
 {
 	for (size_t i = 0; i < teachers.size(); i++)
 	{

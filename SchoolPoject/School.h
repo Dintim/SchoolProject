@@ -27,9 +27,9 @@ public:
 	void addListTests(ListTests& lt); 
 	const vector<Student>& getStudentsList()const { return students; }
 	const vector<Teacher>& getTeachersList()const { return teachers; }
-	const Student& getStudent(int idStudent)const;
+	Student& getStudent(int idStudent); //++
 	const Student& getStudent(string surname)const;
-	const Teacher& getTeacher(int idTeacher) const;
+	Teacher& getTeacher(int idTeacher); //++
 	const Teacher& getTeacher(string surname) const;
 	int getCntStudents()const { return students.size(); }
 	int getCntTeachers()const { return teachers.size(); }
@@ -50,6 +50,7 @@ public:
 	int getCntListTests()const { return listTests.size(); } //++	
 	const ListTests& getListTests(int idCreator)const; //++
 	vector<ListTests>& vectorListTests() { return listTests; } //++
+	vector<Tester>& vectorTesters() { return testers; } //++
 	auto getBeginVectorListTests() { return begin(listTests); } //++
 	auto getEndVectorListTests() { return end(listTests); } //++
 	auto getBeginTesters() { return begin(testers); } //++

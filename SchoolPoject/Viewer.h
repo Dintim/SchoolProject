@@ -22,11 +22,15 @@ public:
 	int intEntry(int c, bool e);
 	int choice(vector<string> ch, int x, int y);
 	
-	void menuA();
+	void menuA(); //++
 	void addTeacherMenu(); //++
 	void addStudentMenu(); //++
 	void showTeachers(); //++
-	void teacherMenu(int id); //++
+	void teacherMenu(int idTeacher); //++
+	void changeTeacher(int idTeacher); //++
+	void showStudents(); //++
+	void studentMenu(int idStudent); //++
+	void changeStudent(int idStudent); //++
 
 	void menuT(int id);
 	void menuS(int id);	
