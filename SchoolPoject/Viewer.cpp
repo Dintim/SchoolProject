@@ -606,29 +606,24 @@ void Viewer::showMyTests(int id) //++
 		cout << "Список ваших тестов";
 		gotoXY(15, 8); white();
 		int k1 = 8;
+		vector<string> vec;
 		for (auto&i : sch.vectorListTests()) {
-			if (i.getIdCreator() == id) {
-				gotoXY(15, k1);
-				cout << "Тест №" << i.getIdTest();
-				gotoXY(32, k1);
-				cout << i.getTestName();
-				k1++;
+			if (i.getIdCreator() == id) {				
+				vec.push_back(i.getTestName());				
 			}
 		}
+		vec.push_back("Выйти");
 		int k2 = ++k1; int testNum;
-		gotoXY(15, k2);
-		vector<string> v = { "выбрать номер теста", "выйти" };
-		int s = choice(v, 15, k2);
-		if (s == 2)
-			break;
-		if (s == 1) {
-			int k3 = k2+3;
-			gotoXY(15, k3);
-			cout << "номер теста:";
-			gotoXY(32, k3);
-			cin >> testNum;
-			testMenu(testNum);
-		}
+		gotoXY(15, k2);		
+		int s = choice(vec, 15, k2);
+		if (s == vec.size())
+			break;		
+		string tmp = vec[s-1];
+		auto it = find_if(begin(sch.vectorListTests()), end(sch.vectorListTests()), [&tmp](ListTests&i) {
+			return i.getTestName() == tmp;
+		});
+		testNum = it->getIdTest();
+		testMenu(testNum);		
 	}
 }
 
@@ -713,6 +708,7 @@ void Viewer::changeTest(int idTest) //++
 			int quesNum;
 			clearScreen();
 			int k = 8;
+			
 			for (auto i = tmp.getBeginTestQuestions(); i != tmp.getEndTestQuestions(); i++)
 			{
 				gotoXY(15, k);

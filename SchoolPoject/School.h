@@ -49,7 +49,7 @@ public:
 	int getCntTesters()const { return testers.size(); } //++
 	int getCntListTests()const { return listTests.size(); } //++	
 	const ListTests& getListTests(int idCreator)const; //++
-	const vector<ListTests>& vectorListTests()const { return listTests; } //++
+	vector<ListTests>& vectorListTests() { return listTests; } //++
 	auto getBeginVectorListTests() { return begin(listTests); } //++
 	auto getEndVectorListTests() { return end(listTests); } //++
 	auto getBeginTesters() { return begin(testers); } //++
