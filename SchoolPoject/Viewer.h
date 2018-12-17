@@ -22,31 +22,31 @@ public:
 	int intEntry(int c, bool e);
 	int choice(vector<string> ch, int x, int y);
 	
-	void menuA(); //++
-	void addTeacherMenu(); //++
-	void addStudentMenu(); //++
-	void showTeachers(); //++
-	void teacherMenu(int idTeacher); //++
-	void changeTeacher(int idTeacher); //++
-	void showStudents(); //++
-	void studentMenu(int idStudent); //++
-	void changeStudent(int idStudent); //++
+	void menuA(); 
+	void addTeacherMenu(); 
+	void addStudentMenu(); 
+	void showTeachers(); 
+	void teacherMenu(int idTeacher); 
+	void changeTeacher(int idTeacher); 
+	void showStudents(); 
+	void studentMenu(string stSurname); //++
+	void changeStudent(string stSurname); //++
 
 	void menuT(int id);
 	void menuS(int id);	
 
-	void addTest(int id); //++
-	void addQuesToTest(Test& t); //++
-	void addAnswers(Question& q, int varNum); //++
+	void addTest(int id); 
+	void addQuesToTest(Test& t); 
+	void addAnswers(Question& q, int varNum); 
 
-	void showMyTests(int id); //++
-	void testMenu(int idTest); //++
-	void studentsPassedTest(int idTest); //++
-	void changeTest(int idTest); //++
-	void changeQuestion(Test &t, int quesNum); //++
-	void changeVarQuestion(Question& q); //++
-	void changeRightAnswers(Question& q); //++
-	void delQuesFromTest(Test& t); //++
+	void showMyTests(int id); 
+	void testMenu(int idTest); 
+	void studentsPassedTest(int idTest); 
+	void changeTest(int idTest); 
+	void changeQuestion(Test &t, int quesNum); 
+	void changeVarQuestion(Question& q); 
+	void changeRightAnswers(Question& q); 
+	void delQuesFromTest(Test& t); 
 
 };
 

@@ -28,7 +28,7 @@ public:
 	const vector<Student>& getStudentsList()const { return students; }
 	const vector<Teacher>& getTeachersList()const { return teachers; }
 	Student& getStudent(int idStudent); //++
-	const Student& getStudent(string surname)const;
+	Student& getStudent(string surname); //++
 	Teacher& getTeacher(int idTeacher); //++
 	const Teacher& getTeacher(string surname) const;
 	int getCntStudents()const { return students.size(); }

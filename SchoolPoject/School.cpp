@@ -70,7 +70,7 @@ Student & School::getStudent(int idStudent) //++
 	return st;
 }
 
-const Student & School::getStudent(string surname) const
+Student & School::getStudent(string surname) //++
 {
 	for (size_t i = 0; i < students.size(); i++)
 	{

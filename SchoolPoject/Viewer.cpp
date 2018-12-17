@@ -658,8 +658,12 @@ void Viewer::changeTeacher(int idTeacher) //++
 		int ch = choice(vec, 15, 8);
 		if (ch == 6)
 			break;
+		clearScreen();
+		gotoXY(15, 5); green();
 		if (ch == 1) {
-			clearScreen();
+			cout << "Текущее имя:";
+			gotoXY(32, 5); green();
+			cout << sch.getTeacher(idTeacher).getFirstName();
 			gotoXY(15, 8); white();
 			cout << "Введите новое имя:";
 			gotoXY(40, 8);
@@ -673,7 +677,9 @@ void Viewer::changeTeacher(int idTeacher) //++
 			Sleep(1000);
 		}
 		if (ch == 2) {
-			clearScreen();
+			cout << "Текущая фамилия:";
+			gotoXY(32, 5); green();
+			cout << sch.getTeacher(idTeacher).getSurname();
 			gotoXY(15, 8); white();
 			cout << "Введите новую фамилию:";
 			gotoXY(45, 8);
@@ -687,7 +693,9 @@ void Viewer::changeTeacher(int idTeacher) //++
 			Sleep(1000);
 		}
 		if (ch == 3) {
-			clearScreen();
+			cout << "Текущая дата рождения:";
+			gotoXY(32, 5); green();
+			cout << sch.getTeacher(idTeacher).getBirthDay();
 			gotoXY(15, 8); white();
 			cout << "Введите новую дату рождения:";
 			gotoXY(15, 9);
@@ -709,7 +717,9 @@ void Viewer::changeTeacher(int idTeacher) //++
 			Sleep(1000);
 		}
 		if (ch == 4) {
-			clearScreen();
+			cout << "Текущий статус:";
+			gotoXY(32, 5); green();
+			cout << sch.getTeacher(idTeacher).getStatus();
 			gotoXY(15, 8); white();
 			vector<string> vec2 = { "работает", "не работает" };
 			int ch2 = choice(vec2, 15, 8);
@@ -725,7 +735,9 @@ void Viewer::changeTeacher(int idTeacher) //++
 			Sleep(1000);
 		}
 		if (ch == 5) {
-			clearScreen();
+			cout << "Текущий пароль:";
+			gotoXY(32, 5); green();
+			cout << sch.getTeacher(idTeacher).getPassword();
 			gotoXY(15, 8); white();
 			cout << "Введите новый пароль:";
 			gotoXY(40, 8);
@@ -749,22 +761,52 @@ void Viewer::showStudents() //++
 	while (true) {
 		clearScreen();
 		gotoXY(15, 5); green();
-		cout << "Список студентов ITStep!";
+		cout << "Список учащихся ITStep!";
 		gotoXY(15, 8); white();
-		vector<string> vec;
-		for (auto&i : sch.getStudentsList()) {
-			string tmp = i.getFirstName() + " " + i.getSurname();
-			vec.push_back(tmp);
+		vector<string> v = { "Абитуриенты","Студенты","Выпускники","Выйти" };
+		int ch = choice(v, 15, 8);
+		if (ch == 4)
+			break;
+		vector<string> vec;		
+		clearScreen();
+		gotoXY(15, 5); green();
+		if (ch == 1) {			
+			cout << "Список абитуриентов";			
+			for (auto&i : sch.getStudentsList()) {
+				if (i.getStatus() == "абитуриент") {
+					string tmp = i.getFirstName() + " " + i.getSurname();
+					vec.push_back(tmp);
+				}
+			}			
+		}
+		if (ch == 2) {			
+			cout << "Список студентов";
+			for (auto&i : sch.getStudentsList()) {
+				if (i.getStatus() == "студент") {
+					string tmp = i.getFirstName() + " " + i.getSurname();
+					vec.push_back(tmp);
+				}
+			}			
+		}
+		if (ch == 3) {			
+			cout << "Список выпускников";			
+			for (auto&i : sch.getStudentsList()) {
+				if (i.getStatus() == "выпускник") {
+					string tmp = i.getFirstName() + " " + i.getSurname();
+					vec.push_back(tmp);
+				}
+			}			
 		}
 		vec.push_back("Выйти");
 		int s = choice(vec, 15, 8);
 		if (s == vec.size())
 			break;
-		studentMenu(s);
+		string stSurname = vec[s - 1].substr(vec[s - 1].find(" ") + 1);
+		studentMenu(stSurname);
 	}
 }
 
-void Viewer::studentMenu(int idStudent) //++??
+void Viewer::studentMenu(string stSurname) //++??
 {
 	if (sch.getCntListTests() == 0)
 		sch.readListTestsFromFile();
@@ -773,7 +815,14 @@ void Viewer::studentMenu(int idStudent) //++??
 	while (true) {
 		clearScreen();
 		gotoXY(15, 5); green();
-		cout << "Студент " << sch.getStudent(idStudent).getFirstName() << " " << sch.getStudent(idStudent).getSurname();
+		string status;
+		if (sch.getStudent(stSurname).getStatus() == "абитуриент")
+			status = "Абитуриент ";
+		if (sch.getStudent(stSurname).getStatus() == "студент")
+			status = "Студент ";
+		if (sch.getStudent(stSurname).getStatus() == "выпускник")
+			status = "Выпускник ";
+		cout << status << sch.getStudent(stSurname).getFirstName() << " " << sch.getStudent(stSurname).getSurname();
 		gotoXY(15, 8); white();
 		vector<string> vec = { "Список пройденных тестов","Изменить","Выйти" };
 		int ch = choice(vec, 15, 8);
@@ -783,54 +832,62 @@ void Viewer::studentMenu(int idStudent) //++??
 			//????
 		}
 		if (ch == 2) {
-			changeStudent(idStudent);
+			changeStudent(stSurname);
 		}
 		Sleep(1000);
 	}
 }
 
-void Viewer::changeStudent(int idStudent) //++
+void Viewer::changeStudent(string stSurname) //++
 {
 	string firstName, surname, status, password;
 	int day, month, year;
 	while (true) {
 		clearScreen();
 		gotoXY(15, 5);
-		cout << "Изменение полей аккаунта студента " << sch.getStudent(idStudent).getFirstName() << " " << sch.getStudent(idStudent).getSurname();
+		cout << "Изменение полей аккаунта студента " << sch.getStudent(stSurname).getFirstName() << " " << sch.getStudent(stSurname).getSurname();
 		vector<string> vec = { "Имя", "Фамилия", "Дата рождения", "Статус", "Пароль", "Выйти" };
 		int ch = choice(vec, 15, 8);
 		if (ch == 6)
 			break;
+		clearScreen();
+		gotoXY(15, 5); green();
 		if (ch == 1) {
-			clearScreen();
+			cout << "Текущее имя:";
+			gotoXY(32, 5); green();
+			cout << sch.getStudent(stSurname).getFirstName();
 			gotoXY(15, 8); white();
 			cout << "Введите новое имя:";
 			gotoXY(40, 8);
 			if (cin.peek() == '\n')
 				cin.get();
 			getline(cin, firstName);
-			sch.getStudent(idStudent).setFirstName(firstName);
+			sch.getStudent(stSurname).setFirstName(firstName);
 			clearScreen();
 			gotoXY(15, 8); white();
 			cout << "Имя изменено!";
 			Sleep(1000);
 		}
 		if (ch == 2) {
-			clearScreen();
+			cout << "Текущая фамилия:";
+			gotoXY(32, 5); green();
+			cout << sch.getStudent(stSurname).getSurname();
 			gotoXY(15, 8); white();
 			cout << "Введите новую фамилию:";
 			gotoXY(45, 8);
 			if (cin.peek() == '\n')
 				cin.get();
 			getline(cin, surname);
-			sch.getStudent(idStudent).setSurname(surname);
+			sch.getStudent(stSurname).setSurname(surname);
 			clearScreen();
 			gotoXY(15, 8); white();
 			cout << "Фамилия изменена!";
 			Sleep(1000);
 		}
 		if (ch == 3) {
-			clearScreen();
+			cout << "Текущая дата рождения:";
+			gotoXY(32, 5); green();
+			cout << sch.getStudent(stSurname).getBirthDay();
 			gotoXY(15, 8); white();
 			cout << "Введите новую дату рождения:";
 			gotoXY(15, 9);
@@ -845,25 +902,27 @@ void Viewer::changeStudent(int idStudent) //++
 			cout << "День:";
 			gotoXY(32, 11);
 			cin >> day;
-			sch.getStudent(idStudent).setBirthDay(date_(day, month, year));
+			sch.getStudent(stSurname).setBirthDay(date_(day, month, year));
 			clearScreen();
 			gotoXY(15, 8); white();
 			cout << "Дата рождения изменена!";
 			Sleep(1000);
 		}
 		if (ch == 4) {
-			clearScreen();
+			cout << "Текущий статус:";
+			gotoXY(32, 5); green();
+			cout << sch.getStudent(stSurname).getStatus();
 			gotoXY(15, 8); white();
 			vector<string> vec2 = { "абитуриент", "студент", "выпускник" };
 			int ch2 = choice(vec2, 15, 8);
 			if (ch2 == 1) {
-				sch.getStudent(idStudent).setStatus("абитуриент");
+				sch.getStudent(stSurname).setStatus("абитуриент");
 			}
 			if (ch2 == 2) {
-				sch.getStudent(idStudent).setStatus("студент");
+				sch.getStudent(stSurname).setStatus("студент");
 			}
 			if (ch2 == 3) {
-				sch.getStudent(idStudent).setStatus("выпускник");
+				sch.getStudent(stSurname).setStatus("выпускник");
 			}
 			clearScreen();
 			gotoXY(15, 8); white();
@@ -871,14 +930,16 @@ void Viewer::changeStudent(int idStudent) //++
 			Sleep(1000);
 		}
 		if (ch == 5) {
-			clearScreen();
+			cout << "Текущий пароль:";
+			gotoXY(32, 5); green();
+			cout << sch.getStudent(stSurname).getPassword();
 			gotoXY(15, 8); white();
 			cout << "Введите новый пароль:";
 			gotoXY(40, 8);
 			if (cin.peek() == '\n')
 				cin.get();
 			getline(cin, password);
-			sch.getStudent(idStudent).setPassword(password);
+			sch.getStudent(stSurname).setPassword(password);
 			clearScreen();
 			gotoXY(15, 8); white();
 			cout << "Пароль изменен!";
@@ -888,7 +949,7 @@ void Viewer::changeStudent(int idStudent) //++
 	sch.writeStudentsToFile();
 }
 
-void Viewer::menuT(int id) //++
+void Viewer::menuT(int id) 
 {
 	while (true) {
 		clearScreen();
