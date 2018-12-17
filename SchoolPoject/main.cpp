@@ -9,8 +9,8 @@ int main()
 	setlocale(LC_ALL, "Rus");
 
 	Viewer v;
-	v.LogIn();
-	//v.menuA();
+	//v.LogIn();
+	v.menuA();
 	//v.menuT(1);
 	//v.menuS(1);	
 	
