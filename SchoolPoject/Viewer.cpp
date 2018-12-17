@@ -96,10 +96,16 @@ void Viewer::LogIn()
 			try
 			{
 				Student tmp = sch.getStudent(l);
-				if (tmp.getPassword() == p)
+				if (tmp.getPassword() == p && tmp.getStatus()!="абитуриент")
 				{
-					menuS(tmp.getIdStudent());
-					//return tmp.getIdStudent();
+					menuS(tmp.getIdStudent());					
+				}
+				else if (tmp.getPassword() == p && tmp.getStatus() == "абитуриент")
+				{
+					gotoXY(15, 11); red();
+					cout << "Вы не можете авторизоваться. Подождите когда администрация Вас зачислит";
+					Sleep(2000);
+					LogIn();
 				}
 			}
 			catch (...)

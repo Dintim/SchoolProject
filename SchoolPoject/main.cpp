@@ -2,8 +2,6 @@
 #include <iterator>
 
 
-
-
 int main()
 {
 	SetConsoleCP(1251);
@@ -15,8 +13,7 @@ int main()
 	//v.menuA();
 	//v.menuT(1);
 	//v.menuS(1);	
-
-
+	
 	system("pause");
 	return 0;
 }
