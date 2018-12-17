@@ -978,8 +978,8 @@ void Viewer::studentMenu(string stSurname) //++??
 		if (ch == 2) {
 			changeStudent(stSurname);
 		}
-		Sleep(1000);
 	}
+	Sleep(1000);
 }
 
 void Viewer::changeStudent(string stSurname) //++
@@ -1806,38 +1806,36 @@ void Viewer::finishTest(int idStudent)
 }
 
 void Viewer::finishTestForAdmin(int idStudent)
-{
-	while (true) {
-		clearScreen();
-		gotoXY(15, 5); green();
-		cout << sch.getStudent(idStudent).getFirstName() << ", пройденные вами тесты:";
-		gotoXY(15, 8); yellow();
-		cout << "Наименование теста";
-		gotoXY(40, 8); yellow();
-		cout << "Ваш результат";
-		int x1 = 15, x2 = 40, y = 9;
-		vector<string> tn;
-		sch.getFinishTestName(idStudent, tn);
-		vector<int> tr;
-		sch.getFinishTestRes(idStudent, tr);
-		vector<int> tmr;
-		sch.getFinishTestMaxRes(idStudent, tmr);
-		for (int i = 0; i < tn.size(); i++)
-		{
-			gotoXY(x1, y); white();
-			cout << tn[i];
-			gotoXY(x2, y); white();
-			cout << tr[i] << " из " << tmr[i] << " возможных";
-			y++;
-		}
+{	
+	clearScreen();
+	gotoXY(15, 5); green();
+	cout << sch.getStudent(idStudent).getFirstName() << ", пройденные вами тесты:";
+	gotoXY(15, 8); yellow();
+	cout << "Наименование теста";
+	gotoXY(40, 8); yellow();
+	cout << "Ваш результат";
+	int x1 = 15, x2 = 40, y = 9;
+	vector<string> tn;
+	sch.getFinishTestName(idStudent, tn);
+	vector<int> tr;
+	sch.getFinishTestRes(idStudent, tr);
+	vector<int> tmr;
+	sch.getFinishTestMaxRes(idStudent, tmr);
+	for (int i = 0; i < tn.size(); i++)
+	{
+		gotoXY(x1, y); white();
+		cout << tn[i];
+		gotoXY(x2, y); white();
+		cout << tr[i] << " из " << tmr[i] << " возможных";
 		y++;
-		gotoXY(x1, y); yellow();
-		cout << "Выйти?";
-		y++;
-		vector<string> v = { "Да", "Нет" };
-		int m = choice(v, x1, y);
-		if (m == 1)
-			break;
 	}
+	y++;
+	gotoXY(x1, y); yellow();
+	cout << "Выйти?";
+	y++;
+	vector<string> v = { "Да" };
+	int m = choice(v, x1, y);
+	if (m == 1)
+		return;	
 }
 
