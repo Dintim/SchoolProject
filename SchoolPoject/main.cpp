@@ -12,9 +12,9 @@ int main()
 
 	Viewer v;
 	v.LogIn();
-	/*v.menuA;
-	v.menuT(1);
-	v.menuS(1);*/	
+	//v.menuA();
+	//v.menuT(1);
+	//v.menuS(1);	
 
 
 	system("pause");
