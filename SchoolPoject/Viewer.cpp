@@ -12,7 +12,7 @@ void Viewer::LogIn()
 	green();
 	cout << "Добро пожаловать в ITStep!";
 	gotoXY(15, 8);
-	vector<string> st1 = { "Войти", "Зарегистрироватся" };
+	vector<string> st1 = { "Войти", "Зарегистрироваться" };
 	int m = 1, k;
 	m = choice(st1, 15, 8);
 	if (m == 1)
@@ -20,7 +20,7 @@ void Viewer::LogIn()
 		clearScreen();
 		gotoXY(15, 5); green();
 		cout << "Добро пожаловать в ITStep!";
-		vector<string> st = { "Преподователь", "Студент", "Администратор" };
+		vector<string> st = { "Преподаватель", "Студент", "Администратор" };
 		int v = choice(st, 15, 8);
 		string l, p;
 		if (v == 3)
@@ -74,7 +74,7 @@ void Viewer::LogIn()
 			catch (...)
 			{
 				gotoXY(15, 10); red();
-				cout << "Преподователь не найден" << endl;
+				cout << "Преподаватель не найден" << endl;
 				Sleep(2000);
 				LogIn();
 			}
@@ -117,10 +117,10 @@ void Viewer::LogIn()
 		gotoXY(15, 5); green();
 		cout << "Добро пожаловать в ITStep!";
 		gotoXY(15, 8); white();
-		cout << "Вы регистриретесь как: ";
+		cout << "Вы регистрируетесь как: ";
 		gotoXY(15, 9); yellow();
 		int st = 1;
-		vector<string> st2 = { "Преподователь", "Студент" };
+		vector<string> st2 = { "Преподаватель", "Студент" };
 		st = choice(st2, 15, 9);
 		clearScreen();
 		gotoXY(15, 5); green();
@@ -219,6 +219,11 @@ void Viewer::LogIn()
 void Viewer::yellow()
 {
 	SetConsoleTextAttribute(hConsole, 14);
+}
+
+void Viewer::cyan()
+{
+	SetConsoleTextAttribute(hConsole, 3);
 }
 
 void Viewer::white()
@@ -415,6 +420,144 @@ int Viewer::choice(vector<string> ch, int x, int y)
 			return choice;
 		}
 	} while (k == 1);
+}
+
+int Viewer::choiceTest(Test t, int idStudent)
+{
+	clearScreen();
+	int nq = 1, ch = 1, code, y = 10, x = 5, cntA = t.getCntTestQuestions();
+	int res = 0;
+	vector<int> chS, fa;
+	vector<int> rA = t.operator[](nq).getRightAnswers();
+	ansC(t.getCntTestQuestions(), nq, fa);
+	gotoXY(5, 5);
+	green();
+	cout << t.operator[](nq).getQuesText() << endl;
+	white();
+	vector<string> ans = t.operator[](nq).getAnswerChoice();
+	viewA(ans, x, y, ch, chS);
+	viewRes(res, idStudent);
+	hintT();
+	do
+	{
+		code = _getch();
+		if (code == 224 || code == 0)
+			code = _getch();
+		if (code == 80)
+		{
+			if (ch != ans.size()) ch++;
+			else ch = 1;
+			viewA(ans, x, y, ch, chS);
+		}
+		else if (code == 72)
+		{
+			if (ch != 1) ch--;
+			else ch = ans.size();
+			viewA(ans, x, y, ch, chS);
+		}
+		else if (code == 75)
+		{
+			if (nq != 1)
+			{
+				nq--;
+				while (fi(fa, nq))
+				{
+					nq--;
+					if (nq < 1) nq = t.getCntTestQuestions();
+				}
+			}
+			else nq = t.getCntTestQuestions();
+			ch = 1;
+			chS.clear();
+			clearScreen();
+			viewRes(res, idStudent);
+			hintT();
+			ansC(t.getCntTestQuestions(), nq, fa);
+			gotoXY(5, 5);
+			green();
+			cout << t.operator[](nq).getQuesText() << endl;
+			white();
+			ans = t.operator[](nq).getAnswerChoice();
+			viewA(ans, x, y, ch, chS);
+		}
+		else if (code == 77)
+		{
+			if (nq != t.getCntTestQuestions())
+			{
+				nq++;
+				while (fi(fa, nq))
+				{
+					nq++;
+					if (nq >= t.getCntTestQuestions()) nq = 1;
+				}
+			}
+			else
+			{
+				nq = 1;
+				while (fi(fa, nq))
+				{
+					nq++;
+					if (nq >= t.getCntTestQuestions()) nq = 1;
+				}
+			}
+			ch = 1;
+			chS.clear();
+			clearScreen();
+			viewRes(res, idStudent);
+			hintT();
+			ansC(t.getCntTestQuestions(), nq, fa);
+			gotoXY(5, 5);
+			green();
+			cout << t.operator[](nq).getQuesText() << endl;
+			white();
+			ans = t.operator[](nq).getAnswerChoice();
+			viewA(ans, x, y, ch, chS);
+		}
+		else if (code == 9)
+		{
+			if (!availability(chS, ch))
+				chS.push_back(ch);
+		}
+		else if (code == 13)
+		{
+			cntA--;
+			fa.push_back(nq);
+			res += checkScore(t, chS, nq);
+			viewRes(res, idStudent);
+			if (nq != t.getCntTestQuestions())
+			{
+				nq++;
+				while (fi(fa, nq))
+				{
+					nq++;
+					if (nq >= t.getCntTestQuestions()) nq = 1;
+				}
+			}
+			else
+			{
+				nq = 1;
+				while (fi(fa, nq))
+				{
+					if (cntA == 0)break;
+					nq++;
+					if (nq >= t.getCntTestQuestions()) nq = 1;
+				}
+			}
+			ch = 1;
+			chS.clear();
+			clearScreen();
+			viewRes(res, idStudent);
+			hintT();
+			ansC(t.getCntTestQuestions(), nq, fa);
+			gotoXY(5, 5);
+			green();
+			cout << t.operator[](nq).getQuesText() << endl;
+			white();
+			ans = t.operator[](nq).getAnswerChoice();
+			viewA(ans, x, y, ch, chS);
+		}
+	} while (cntA > 0);
+	return res;
 }
 
 void Viewer::menuA() //++
@@ -829,7 +972,8 @@ void Viewer::studentMenu(string stSurname) //++??
 		if (ch == 3)
 			break;
 		if (ch == 1) {
-			//????
+			int id = sch.getStudent(stSurname).getIdStudent();
+			finishTestForAdmin(id);			
 		}
 		if (ch == 2) {
 			changeStudent(stSurname);
@@ -980,7 +1124,8 @@ void Viewer::menuS(int id)
 	clearScreen();
 	gotoXY(15, 5);
 	green();
-	cout << "Добро пожаловать в ITStep!";
+	sch.readStudentsFromFile();
+	cout << "Добро пожаловать " << sch.getStudent(id).getFirstName();
 	gotoXY(15, 8);
 	vector<string> st1 = { "Пройти тест", "Пройденные тесты", "Выйти" };
 	int m = 1;
@@ -991,11 +1136,11 @@ void Viewer::menuS(int id)
 	}
 	else if (m == 1)
 	{
-
+		passingTest(id);
 	}
 	else if (m == 2)
 	{
-
+		finishTest(id);
 	}
 
 }
@@ -1336,7 +1481,7 @@ void Viewer::changeVarQuestion(Question & q) //++
 		gotoXY(15, 5); green();
 		cout << "Изменение вариантов ответов";
 		gotoXY(15, 8); white();
-		vector<string> v = { "изменить текст варианта", "добавить новый вариант", "удалить вариант", "выйти" };
+		vector<string> v = { "Изменить текст варианта", "Добавить новый вариант", "Удалить вариант", "Выйти" };
 		int ch = choice(v, 15, 8);
 		if (ch == 4)
 			break;
@@ -1409,7 +1554,7 @@ void Viewer::changeRightAnswers(Question & q) //++
 		gotoXY(15, 5); green();
 		cout << "Изменение метки правильных вариантов ответов";
 		gotoXY(15, 8); white();
-		vector<string> v = { "добавить", "удалить", "выйти" };
+		vector<string> v = { "Добавить", "Удалить", "Выйти" };
 		int ch = choice(v, 15, 8);
 		if (ch == 3)
 			break;
@@ -1479,3 +1624,220 @@ void Viewer::delQuesFromTest(Test & t) //++
 	}
 
 }
+
+void Viewer::passingTest(int idStudent)
+{
+	clearScreen();
+	gotoXY(15, 5);
+	green();
+	sch.readStudentsFromFile();
+	cout << "Добро пожаловать " << sch.getStudent(idStudent).getFirstName();
+	int res;
+	gotoXY(15, 8); white();
+	sch.readListTestsFromFile();
+	vector<string> lt;
+	for (auto i : sch.getListTests())
+	{
+		lt.push_back(i.getTestName());
+	}
+	clearScreen();
+	gotoXY(15, 5); green();
+	cout << sch.getStudent(idStudent).getFirstName() << " выберите тест";
+	int ti = choice(lt, 15, 8);
+	Test t;
+	t.readFromFile("tests/" + to_string(ti));
+	res = choiceTest(t, idStudent);
+	sch.readTestersFromFile();
+	Tester ts(idStudent, t.getIdTest(), res);
+	sch.addTester(ts);
+	sch.writeTestersToFile();
+	clearScreen();
+	gotoXY(15, 5);
+	green();
+	cout << sch.getStudent(idStudent).getFirstName() << " пройти еще один тест?";
+	gotoXY(15, 8);
+	vector<string> st1 = { "Да", "Нет" };
+	int m = 1;
+	m = choice(st1, 15, 8);
+	if (m == 2)
+	{
+		menuS(idStudent);
+	}
+	else if (m == 1)
+	{
+		passingTest(idStudent);
+	}
+}
+
+void Viewer::ansC(int cnt, int ta, vector<int> fa)
+{
+	gotoXY(5, 3); white();
+	cout << "Вопрос № ";
+	gotoXY(14, 3); white();
+	int c = 0;
+	for (int j = 1; j <= cnt; j++)
+	{
+		for (auto&i : fa)
+		{
+			if (j == i) c = j;
+		}
+		if (j == ta)
+		{
+			yellow(); cout << j << " ";
+		}
+		else if (j == c)
+		{
+			green();
+			cout << j << " ";
+		}
+		else
+		{
+			white(); cout << j << " ";
+		}
+	}
+}
+
+void Viewer::viewA(vector<string> ans, int x, int y, int &ch, vector<int> chS)
+{
+	int x1, y1;
+	x1 = x; y1 = y;
+	int c = 0;
+	for (int i = 1; i <= ans.size(); i++)
+	{
+		for (auto&j : chS)
+		{
+			if (j == i) c = j;
+		}
+		gotoXY(x1, y1);
+		if (i == ch)
+		{
+			yellow();
+			cout << "-> " + ans[i - 1];
+		}
+		else if (i == c)
+		{
+			cyan();
+			cout << "-> " + ans[i - 1];
+		}
+		else
+		{
+			white();
+			cout << "   " + ans[i - 1];
+		}
+		y1++;
+	}
+}
+
+bool Viewer::fi(vector<int> i, int ch)
+{
+	for (auto&j : i) if (j == ch) return true;
+	return false;
+}
+
+void Viewer::viewRes(int res, int idStudent)
+{
+	sch.readStudentsFromFile();
+	gotoXY(40, 3); yellow();
+	cout << sch.getStudent(idStudent).getFirstName() << ", ваш резльтат: " << res;
+}
+
+int Viewer::checkScore(Test t, vector<int> chS, int nq)
+{
+	int res = 0;
+	for (auto&i : chS)
+	{
+		for (auto&j : t.operator[](nq).getRightAnswers())
+			if (j == i) res++;
+	}
+	return res;
+}
+
+bool Viewer::availability(vector<int> chS, int ch)
+{
+	for (auto&i : chS) if (i == ch)return true;
+	return false;
+}
+
+void Viewer::hintT()
+{
+	gotoXY(5, 20); green();
+	cout << "*Для выбора ответа нажмите на стрелки вверх или вниз";
+	gotoXY(5, 21); green();
+	cout << "*Tab для подтвержения выбора ответа";
+	gotoXY(5, 22); green();
+	cout << "*Для выбора вопроса нажмите на стрелки влево или вправо";
+	gotoXY(5, 23); green();
+	cout << "*Enter закончить вопрос";
+}
+
+void Viewer::finishTest(int idStudent)
+{
+	clearScreen();
+	gotoXY(15, 5); green();
+	cout << sch.getStudent(idStudent).getFirstName() << ", пройденные вами тесты:";
+	gotoXY(15, 8); yellow();
+	cout << "Наименование теста";
+	gotoXY(40, 8); yellow();
+	cout << "Ваш результат";
+	int x1 = 15, x2 = 40, y = 9;
+	vector<string> tn;
+	sch.getFinishTestName(idStudent, tn);
+	vector<int> tr;
+	sch.getFinishTestRes(idStudent, tr);
+	vector<int> tmr;
+	sch.getFinishTestMaxRes(idStudent, tmr);
+	for (int i = 0; i < tn.size(); i++)
+	{
+		gotoXY(x1, y); white();
+		cout << tn[i];
+		gotoXY(x2, y); white();
+		cout << tr[i] << " из " << tmr[i] << " возможных";
+		y++;
+	}
+	y++;
+	gotoXY(x1, y); yellow();
+	cout << "Выйти?";
+	y++;
+	vector<string> v = { "Да" };
+	int m = choice(v, x1, y);
+	if (m == 1) {
+		menuS(idStudent);
+	}
+}
+
+void Viewer::finishTestForAdmin(int idStudent)
+{
+	while (true) {
+		clearScreen();
+		gotoXY(15, 5); green();
+		cout << sch.getStudent(idStudent).getFirstName() << ", пройденные вами тесты:";
+		gotoXY(15, 8); yellow();
+		cout << "Наименование теста";
+		gotoXY(40, 8); yellow();
+		cout << "Ваш результат";
+		int x1 = 15, x2 = 40, y = 9;
+		vector<string> tn;
+		sch.getFinishTestName(idStudent, tn);
+		vector<int> tr;
+		sch.getFinishTestRes(idStudent, tr);
+		vector<int> tmr;
+		sch.getFinishTestMaxRes(idStudent, tmr);
+		for (int i = 0; i < tn.size(); i++)
+		{
+			gotoXY(x1, y); white();
+			cout << tn[i];
+			gotoXY(x2, y); white();
+			cout << tr[i] << " из " << tmr[i] << " возможных";
+			y++;
+		}
+		y++;
+		gotoXY(x1, y); yellow();
+		cout << "Выйти?";
+		y++;
+		vector<string> v = { "Да", "Нет" };
+		int m = choice(v, x1, y);
+		if (m == 1)
+			break;
+	}
+}
+

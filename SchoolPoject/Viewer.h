@@ -12,6 +12,7 @@ public:
 	Viewer();
 	void LogIn();
 	void yellow();
+	void cyan();
 	void white();
 	void red();
 	void green();
@@ -21,6 +22,7 @@ public:
 	string pasEntry();
 	int intEntry(int c, bool e);
 	int choice(vector<string> ch, int x, int y);
+	int choiceTest(Test t, int idStudent);
 	
 	void menuA(); 
 	void addTeacherMenu(); 
@@ -48,5 +50,15 @@ public:
 	void changeRightAnswers(Question& q); 
 	void delQuesFromTest(Test& t); 
 
+	void passingTest(int idStudent);//+++
+	void ansC(int cnt, int ta, vector<int> fa);//+++
+	void viewA(vector<string> ans, int x, int y, int &ch, vector<int> chS);//+++
+	bool fi(vector<int> i, int ch);//+++
+	void viewRes(int res, int idStudent);//+++
+	int checkScore(Test t, vector<int> chS, int nq);//+++
+	bool availability(vector<int> chS, int ch);//+++
+	void hintT();//+++
+	void finishTest(int idStudent);//+++
+	void finishTestForAdmin(int idStudent);//+++
 };
 

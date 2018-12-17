@@ -103,6 +103,50 @@ const Teacher & School::getTeacher(string surname) const
 	return t;
 }
 
+void School::getFinishTestName(int idStudent, vector<string>& tn)
+{
+	testers.clear();
+	readTestersFromFile();
+	vector<int> idTest;
+	for (auto&i : getTesters())
+	{
+		if (i.getIdStudent() == idStudent) idTest.push_back(i.getIdTest());
+	}
+	Test t;
+	for (auto&i : idTest)
+	{
+		t.readFromFile("tests/" + to_string(i));
+		tn.push_back(t.getTestName());
+	}
+}
+
+void School::getFinishTestRes(int idStudent, vector<int>& tr)
+{
+	testers.clear();
+	readTestersFromFile();
+	for (auto&i : getTesters())
+	{
+		if (i.getIdStudent() == idStudent) tr.push_back(i.getTestResult());
+	}
+}
+
+void School::getFinishTestMaxRes(int idStudent, vector<int>& tmr)
+{
+	testers.clear();
+	readTestersFromFile();
+	vector<int> idTest;
+	for (auto&i : getTesters())
+	{
+		if (i.getIdStudent() == idStudent) idTest.push_back(i.getIdTest());
+	}
+	Test t;
+	for (auto&i : idTest)
+	{
+		t.readFromFile("tests/" + to_string(i));
+		tmr.push_back(t.getTestMaxResult());
+	}
+}
+
 void School::writeStudentsToFile()
 {
 	ofstream os("students");
